@@ -57,7 +57,41 @@ chatbot/
 
 ## Usage
 
-Run the Streamlit application from the `chatbot` directory:
+3. Set up the Backend (Python/Flask):
+
+Open a terminal or command prompt on your work laptop.
+Navigate into the cloned project directory (e.g., cd path/to/project-grail-chatbot).
+Create and activate a Python virtual environment (highly recommended):
+python -m venv venv (This creates a venv folder)
+On Windows: venv\Scripts\activate
+On macOS/Linux: source venv/bin/activate
+Install Python dependencies:
+With your virtual environment active, run: pip install -r requirements.txt
+Create the API Key File:
+In the project's root directory on your work laptop, manually create the gemini_api_key.env file (this file was ignored by Git and thus not cloned).
+Add your Google API key to it:
+CopyInsert
+GOOGLE_API_KEY='YOUR_ACTUAL_GOOGLE_API_KEY'
+SOPs/Data Directory:
+Your config.py specifies SOP_DIR_NAME = "sops". Create this sops directory in the project root on your work laptop if it doesn't exist.
+Copy your SOP documents (PDFs, DOCX, TXT files) into this sops directory. (These were likely not uploaded to GitHub if they are large or numerous).
+4. Set up the Frontend (React):
+
+In your terminal, navigate to the frontend directory within your project: cd frontend
+Install Node.js dependencies:
+Run: npm install
+5. Run the Application:
+
+You'll need two terminals open.
+Terminal 1: Start the Backend (Flask):
+Make sure you are in the project's root directory (path/to/project-grail-chatbot).
+Ensure your Python virtual environment (venv) is activated.
+Run: python app.py
+You should see output indicating the Flask server is running (usually on http://127.0.0.1:5000/).
+Terminal 2: Start the Frontend (React):
+Navigate to the frontend directory (path/to/project-grail-chatbot/frontend).
+Run: npm start
+This will usually open the application automatically in your web browser at http://localhost:3000. If not, open it manually.
 
 ```bash
 streamlit run main.py
