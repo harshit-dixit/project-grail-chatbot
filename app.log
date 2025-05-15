@@ -93,3 +93,6 @@
 2025-05-15 15:13:48,905 - INFO - app - Received question: 'What is hana for cloud'
 2025-05-15 15:13:51,793 - INFO - app - LLM Answer: 'This question cannot be answered from the given context.  The provided text mentions SAP HANA in rel...'
 2025-05-15 15:13:51,795 - INFO - _internal - 127.0.0.1 - - [15/May/2025 15:13:51] "POST /api/ask HTTP/1.1" 200 -
+2025-05-15 15:53:11,587 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\app.py', reloading
+2025-05-15 15:53:11,593 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\config.py', reloading
+2025-05-15 15:53:11,764 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\gemini_handler.py', reloading
