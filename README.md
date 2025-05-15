@@ -61,10 +61,12 @@ chatbot/
 
 Open a terminal or command prompt on your work laptop.
 Navigate into the cloned project directory (e.g., cd path/to/project-grail-chatbot).
+
 Create and activate a Python virtual environment (highly recommended):
 python -m venv venv (This creates a venv folder)
 On Windows: venv\Scripts\activate
 On macOS/Linux: source venv/bin/activate
+
 Install Python dependencies:
 With your virtual environment active, run: pip install -r requirements.txt
 Create the API Key File:
@@ -117,6 +119,7 @@ CopyInsert
 ```bash python -m venv venv ```
 .\venv\Scripts\activate  # On Windows
 # source venv/bin/activate # On macOS/Linux
+
 Install Python dependencies:
 bash
 CopyInsert in Terminal
@@ -127,8 +130,10 @@ Install Node.js dependencies:
 bash
 CopyInsert in Terminal
 npm install
+
 API Key:
 Crucially, you will need to recreate your gemini_api_key.env file in the root of the chatbot directory on your work laptop. Add your GOOGLE_API_KEY=YOUR_ACTUAL_KEY to this file. Do not commit this file to public Git repositories. If you are using Git, ensure .env or *.env is listed in your .gitignore file.
+
 Verify Logo Paths (if manual copy):
 If you manually copied and had any issues with logo paths recently, just double-check they are correct relative to App.js (frontend/src/logo/ was the last setup).
 Running the Application on your Work Laptop:
