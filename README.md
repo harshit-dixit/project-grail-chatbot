@@ -79,22 +79,70 @@ Copy your SOP documents (PDFs, DOCX, TXT files) into this sops directory. (These
 
 In your terminal, navigate to the frontend directory within your project: cd frontend
 Install Node.js dependencies:
-Run: npm install
+Run: ```bash npm install ```
 5. Run the Application:
 
 You'll need two terminals open.
 Terminal 1: Start the Backend (Flask):
 Make sure you are in the project's root directory (path/to/project-grail-chatbot).
 Ensure your Python virtual environment (venv) is activated.
-Run: python app.py
+Run: ```bash python app.py ```
 You should see output indicating the Flask server is running (usually on http://127.0.0.1:5000/).
 Terminal 2: Start the Frontend (React):
 Navigate to the frontend directory (path/to/project-grail-chatbot/frontend).
-Run: npm start
+Run: ```bash npm start ```
 This will usually open the application automatically in your web browser at http://localhost:3000. If not, open it manually.
 
-```bash
-streamlit run main.py
-```
+
+
+
+Method 2: Manual Copy (If not using Git or no remote repository)
+
+On your current laptop:
+Locate your main project directory: C:\Users\seema\Desktop\AI\windsurf\chatbot
+Copy this entire chatbot folder to a USB drive, network share, or use a cloud storage service (like OneDrive, Google Drive, Dropbox) to transfer it.
+Important: When copying, you can usually exclude the frontend/node_modules folder and the Python virtual environment folder (e.g., venv, .venv) if you have one in the backend. These can be very large and are easily recreated.
+On your work laptop:
+Copy the chatbot folder from your transfer medium to your desired location.
+Regardless of the transfer method, you'll need to set up the environment on your work laptop:
+
+Install Prerequisites:
+Python: Ensure Python is installed (preferably the same version you used, or a compatible one).
+Node.js and npm: Ensure Node.js (which includes npm) is installed for the frontend.
+Set up Backend (Python):
+Navigate to your backend directory (e.g., C:\path\to\chatbot\).
+It's highly recommended to use a virtual environment:
+bash
+CopyInsert
+```bash python -m venv venv ```
+.\venv\Scripts\activate  # On Windows
+# source venv/bin/activate # On macOS/Linux
+Install Python dependencies:
+bash
+CopyInsert in Terminal
+pip install -r requirements.txt
+Set up Frontend (React):
+Navigate to your frontend directory (e.g., C:\path\to\chatbot\frontend\).
+Install Node.js dependencies:
+bash
+CopyInsert in Terminal
+npm install
+API Key:
+Crucially, you will need to recreate your gemini_api_key.env file in the root of the chatbot directory on your work laptop. Add your GOOGLE_API_KEY=YOUR_ACTUAL_KEY to this file. Do not commit this file to public Git repositories. If you are using Git, ensure .env or *.env is listed in your .gitignore file.
+Verify Logo Paths (if manual copy):
+If you manually copied and had any issues with logo paths recently, just double-check they are correct relative to App.js (frontend/src/logo/ was the last setup).
+Running the Application on your Work Laptop:
+
+Once everything is set up:
+
+Start the Backend (Flask):
+Open a terminal in the chatbot directory (with your Python virtual environment activated).
+Run: python app.py
+Start the Frontend (React Dev Server):
+Open another terminal in the chatbot/frontend directory.
+Run: npm start
+This should get Project GRAIL up and running on your work machine. The key is to replicate the file structure and reinstall all dependencies.
+
+
 
 This will open the chatbot interface in your web browser.
