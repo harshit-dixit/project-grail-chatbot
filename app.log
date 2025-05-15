@@ -1,0 +1,95 @@
+2025-05-15 14:51:30,074 - INFO - app - Flask app starting: API key loaded.
+2025-05-15 14:51:30,076 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-15 14:51:30,136 - INFO - app - LLM initialized successfully.
+2025-05-15 14:51:30,137 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-15 14:51:30,205 - WARNING - _internal -  * Debugger is active!
+2025-05-15 14:51:30,211 - INFO - _internal -  * Debugger PIN: 100-938-965
+2025-05-15 14:51:37,887 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\config.py', reloading
+2025-05-15 14:51:37,889 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\config.py', reloading
+2025-05-15 14:51:38,777 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\flask\\__init__.py', reloading
+2025-05-15 14:51:38,801 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\flask\\app.py', reloading
+2025-05-15 14:51:38,803 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\flask\\sansio\\app.py', reloading
+2025-05-15 14:51:38,806 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\flask\\sansio\\scaffold.py', reloading
+2025-05-15 14:51:43,230 - INFO - app - Flask app starting: API key loaded.
+2025-05-15 14:51:43,231 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-15 14:51:43,254 - INFO - app - LLM initialized successfully.
+2025-05-15 14:51:43,254 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-15 14:51:43,266 - WARNING - _internal -  * Debugger is active!
+2025-05-15 14:51:43,271 - INFO - _internal -  * Debugger PIN: 100-938-965
+2025-05-15 14:51:50,925 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\gemini_handler.py', reloading
+2025-05-15 14:51:50,926 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\gemini_handler.py', reloading
+2025-05-15 14:51:54,369 - INFO - app - Flask app starting: API key loaded.
+2025-05-15 14:51:54,369 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-15 14:51:54,385 - INFO - app - LLM initialized successfully.
+2025-05-15 14:51:54,385 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-15 14:51:54,395 - WARNING - _internal -  * Debugger is active!
+2025-05-15 14:51:54,398 - INFO - _internal -  * Debugger PIN: 100-938-965
+2025-05-15 14:52:07,861 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\utils.py', reloading
+2025-05-15 14:52:07,862 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\utils.py', reloading
+2025-05-15 14:52:07,862 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\utils.py', reloading
+2025-05-15 14:52:10,789 - INFO - app - Flask app starting: API key loaded.
+2025-05-15 14:52:10,790 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-15 14:52:10,807 - INFO - app - LLM initialized successfully.
+2025-05-15 14:52:10,807 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-15 14:52:10,818 - WARNING - _internal -  * Debugger is active!
+2025-05-15 14:52:10,821 - INFO - _internal -  * Debugger PIN: 100-938-965
+2025-05-15 14:52:19,373 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\app.py', reloading
+2025-05-15 14:52:19,374 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\app.py', reloading
+2025-05-15 14:52:22,782 - INFO - app - Flask app starting: API key loaded.
+2025-05-15 14:52:22,783 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-15 14:52:22,801 - INFO - app - LLM initialized successfully.
+2025-05-15 14:52:22,802 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-15 14:52:22,872 - WARNING - _internal -  * Debugger is active!
+2025-05-15 14:52:22,879 - INFO - _internal -  * Debugger PIN: 100-938-965
+2025-05-15 14:53:43,657 - INFO - _internal - 127.0.0.1 - - [15/May/2025 14:53:43] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 14:53:43,660 - INFO - _internal - 127.0.0.1 - - [15/May/2025 14:53:43] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 14:53:47,829 - INFO - app - '/api/process_sops' endpoint called. Starting SOP processing...
+2025-05-15 14:53:52,571 - INFO - app - SOP Processing: Loaded 1 documents.
+2025-05-15 14:53:52,581 - INFO - app - SOP Processing: Created 368 text chunks.
+2025-05-15 14:53:53,360 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-15 14:53:54,331 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-15 14:53:54,345 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-15 14:53:54,364 - INFO - app - SOPs processed successfully.
+2025-05-15 14:53:54,364 - INFO - _internal - 127.0.0.1 - - [15/May/2025 14:53:54] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-15 14:53:54,373 - INFO - _internal - 127.0.0.1 - - [15/May/2025 14:53:54] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 14:54:00,058 - INFO - _internal - 127.0.0.1 - - [15/May/2025 14:54:00] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-15 14:54:00,064 - INFO - app - Received question: 'what is hana'
+2025-05-15 14:54:04,143 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\logging\\__init__.py', reloading
+2025-05-15 14:54:04,200 - INFO - app - LLM Answer: 'The provided text mentions SAP HANA as a database platform.  More information can be found in the *S...'
+2025-05-15 14:54:04,200 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\encodings\\cp1252.py', reloading
+2025-05-15 14:54:04,201 - INFO - _internal - 127.0.0.1 - - [15/May/2025 14:54:04] "POST /api/ask HTTP/1.1" 200 -
+2025-05-15 14:54:04,201 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\werkzeug\\debug\\__init__.py', reloading
+2025-05-15 14:54:04,201 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\werkzeug\\serving.py', reloading
+2025-05-15 14:54:04,202 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\http\\server.py', reloading
+2025-05-15 14:54:04,202 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\socketserver.py', reloading
+2025-05-15 14:54:04,202 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\threading.py', reloading
+2025-05-15 14:54:09,247 - INFO - app - Flask app starting: API key loaded.
+2025-05-15 14:54:09,247 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-15 14:54:09,264 - INFO - app - LLM initialized successfully.
+2025-05-15 14:54:09,265 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-15 14:54:09,276 - WARNING - _internal -  * Debugger is active!
+2025-05-15 14:54:09,280 - INFO - _internal -  * Debugger PIN: 100-938-965
+2025-05-15 14:55:28,877 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\vector_store_manager.py', reloading
+2025-05-15 14:55:38,057 - INFO - app - Flask app starting: API key loaded.
+2025-05-15 14:55:38,059 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-15 14:55:38,107 - INFO - app - LLM initialized successfully.
+2025-05-15 14:55:38,107 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-15 14:55:38,146 - WARNING - _internal -  * Debugger is active!
+2025-05-15 14:55:38,154 - INFO - _internal -  * Debugger PIN: 100-938-965
+2025-05-15 14:56:35,551 - INFO - _internal - 127.0.0.1 - - [15/May/2025 14:56:35] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 14:56:35,559 - INFO - _internal - 127.0.0.1 - - [15/May/2025 14:56:35] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 15:13:29,255 - INFO - _internal - 127.0.0.1 - - [15/May/2025 15:13:29] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 15:13:29,261 - INFO - _internal - 127.0.0.1 - - [15/May/2025 15:13:29] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 15:13:33,701 - INFO - app - '/api/process_sops' endpoint called. Starting SOP processing...
+2025-05-15 15:13:37,015 - INFO - app - SOP Processing: Loaded 1 documents.
+2025-05-15 15:13:37,026 - INFO - app - SOP Processing: Created 368 text chunks.
+2025-05-15 15:13:37,041 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-15 15:13:37,194 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-15 15:13:37,209 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-15 15:13:37,239 - INFO - app - SOPs processed successfully.
+2025-05-15 15:13:37,241 - INFO - _internal - 127.0.0.1 - - [15/May/2025 15:13:37] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-15 15:13:37,256 - INFO - _internal - 127.0.0.1 - - [15/May/2025 15:13:37] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 15:13:48,899 - INFO - _internal - 127.0.0.1 - - [15/May/2025 15:13:48] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-15 15:13:48,905 - INFO - app - Received question: 'What is hana for cloud'
+2025-05-15 15:13:51,793 - INFO - app - LLM Answer: 'This question cannot be answered from the given context.  The provided text mentions SAP HANA in rel...'
+2025-05-15 15:13:51,795 - INFO - _internal - 127.0.0.1 - - [15/May/2025 15:13:51] "POST /api/ask HTTP/1.1" 200 -
