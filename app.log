@@ -96,3 +96,591 @@
 2025-05-15 15:53:11,587 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\app.py', reloading
 2025-05-15 15:53:11,593 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\config.py', reloading
 2025-05-15 15:53:11,764 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\gemini_handler.py', reloading
+2025-05-15 17:23:22,575 - INFO - app - Flask app starting: API key loaded.
+2025-05-15 17:23:22,576 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-15 17:23:22,622 - INFO - app - LLM initialized successfully.
+2025-05-15 17:23:22,624 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-15 17:23:22,651 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.188.225:5001
+2025-05-15 17:23:22,651 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-15 17:23:22,669 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-15 17:23:24,715 - INFO - app - Flask app starting: API key loaded.
+2025-05-15 17:23:24,716 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-15 17:23:24,734 - INFO - app - LLM initialized successfully.
+2025-05-15 17:23:24,735 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-15 17:23:24,750 - WARNING - _internal -  * Debugger is active!
+2025-05-15 17:23:24,757 - INFO - _internal -  * Debugger PIN: 100-938-965
+2025-05-15 17:24:22,012 - INFO - _internal - 127.0.0.1 - - [15/May/2025 17:24:22] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 17:24:22,020 - INFO - _internal - 127.0.0.1 - - [15/May/2025 17:24:22] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 17:25:14,830 - INFO - app - '/api/process_sops' endpoint called. Starting SOP processing...
+2025-05-15 17:25:18,545 - INFO - app - SOP Processing: Loaded 1 documents.
+2025-05-15 17:25:18,556 - INFO - app - SOP Processing: Created 368 text chunks.
+2025-05-15 17:25:18,592 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-15 17:25:18,709 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-15 17:25:18,717 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-15 17:25:18,733 - INFO - app - SOPs processed successfully.
+2025-05-15 17:25:18,734 - INFO - _internal - 127.0.0.1 - - [15/May/2025 17:25:18] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-15 17:25:18,741 - INFO - _internal - 127.0.0.1 - - [15/May/2025 17:25:18] "GET /api/status HTTP/1.1" 200 -
+2025-05-15 17:25:25,997 - INFO - _internal - 127.0.0.1 - - [15/May/2025 17:25:25] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-15 17:25:26,003 - INFO - app - Received question: 'what is sap'
+2025-05-15 17:25:32,527 - INFO - app - Retrieved 5 source documents for question: 'what is sap'. Details: Source: Unknown, Page: N/A, Snippet: SE (or an SAP affiliate  company) in Germany and other countries. All
+other...; Source: Unknown, Page: N/A, Snippet: example code unless damages have been caused by SAP's gross negligence or w...; Source: Unknown, Page: N/A, Snippet: without prior notice.
+Some software products marketed by SAP SE and its dis...; Source: Unknown, Page: N/A, Snippet: This section of the Operations Guide for SAP S/4HANA contains information a...; Source: Unknown, Page: N/A, Snippet: agreements with SAP) to this:
+• The content of the linked-to site is not SA...
+2025-05-15 17:25:32,530 - INFO - app - LLM Answer: 'Based on the provided text, SAP refers to SAP SE or an SAP affiliate company.  SAP SE is a company t...'
+2025-05-15 17:25:32,532 - INFO - _internal - 127.0.0.1 - - [15/May/2025 17:25:32] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 10:56:48,641 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 10:56:48,645 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 10:56:48,821 - INFO - app - LLM initialized successfully.
+2025-05-16 10:56:48,824 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 10:56:49,044 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.155.15.159:5001
+2025-05-16 10:56:49,048 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-16 10:56:49,188 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 10:56:55,945 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 10:56:55,946 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 10:56:55,988 - INFO - app - LLM initialized successfully.
+2025-05-16 10:56:55,990 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 10:56:56,016 - WARNING - _internal -  * Debugger is active!
+2025-05-16 10:56:56,027 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 10:57:36,460 - INFO - _internal - 127.0.0.1 - - [16/May/2025 10:57:36] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 10:57:36,529 - INFO - _internal - 127.0.0.1 - - [16/May/2025 10:57:36] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 10:58:51,604 - INFO - app - '/api/process_sops' endpoint called. Starting SOP processing...
+2025-05-16 10:58:59,274 - INFO - app - SOP Processing: Loaded 2 documents.
+2025-05-16 10:58:59,286 - INFO - app - SOP Processing: Created 372 text chunks.
+2025-05-16 10:58:59,319 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-16 10:58:59,564 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-16 10:58:59,606 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-16 10:58:59,629 - INFO - app - SOPs processed successfully.
+2025-05-16 10:58:59,631 - INFO - _internal - 127.0.0.1 - - [16/May/2025 10:58:59] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-16 10:58:59,645 - INFO - _internal - 127.0.0.1 - - [16/May/2025 10:58:59] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 10:59:43,231 - INFO - _internal - 127.0.0.1 - - [16/May/2025 10:59:43] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 10:59:43,239 - INFO - app - Received question: 'Hi'
+2025-05-16 10:59:45,324 - INFO - app - Retrieved 5 source documents for question: 'Hi'. Details: Source: Unknown, Page: N/A, Snippet: Overview of T race and Log
+Files [page 67] )
+SAP_EHFND_PCEP (report
+R_EHFND...; Source: Unknown, Page: N/A, Snippet: Environment, Health, and Safety  working smoothly over time.
+Operations Gui...; Source: Unknown, Page: N/A, Snippet: Performance Analysis [page 79] .
+84 PUBLICOperations Guide
+SAP S/4HANA Busi...; Source: Unknown, Page: N/A, Snippet: Trace Analysis
+T o analyze or view the traces directly in the Business Obje...; Source: Unknown, Page: N/A, Snippet: uses the component. T asks relevant for only certain solution capabilities,...
+2025-05-16 10:59:45,327 - INFO - app - LLM Answer: 'Please provide your question.  I need a question to answer based on the provided text....'
+2025-05-16 10:59:45,329 - INFO - _internal - 127.0.0.1 - - [16/May/2025 10:59:45] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:00:07,537 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:00:07] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:00:07,544 - INFO - app - Received question: 'How to login into GRDC'
+2025-05-16 11:00:09,273 - INFO - app - Retrieved 5 source documents for question: 'How to login into GRDC'. Details: Source: Unknown, Page: N/A, Snippet: Stewardship for Process Industries  and the tools that are used to configur...; Source: Unknown, Page: N/A, Snippet: RACC_IMP_ERP_UIDaily or weekly, depending
+on business process and ac-
+count...; Source: Unknown, Page: N/A, Snippet: Windows Wordprocessor In-
+tegration and ExpertWWI and Expert Server
+Adminis...; Source: Unknown, Page: N/A, Snippet: settings for one user or for all users. The changeable user settings are th...; Source: Unknown, Page: N/A, Snippet: cluding the log files.
+Expert ExpAdmin.Exe Used to configure  the Expert
+ru...
+2025-05-16 11:00:09,277 - INFO - app - LLM Answer: 'This question cannot be answered from the given context.  The provided text describes configuration ...'
+2025-05-16 11:00:09,279 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:00:09] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:00:56,587 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:00:56] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:00:56,593 - INFO - app - Received question: 'Unable to Login to GRDC System'
+2025-05-16 11:01:02,006 - INFO - app - Retrieved 5 source documents for question: 'Unable to Login to GRDC System'. Details: Source: Unknown, Page: N/A, Snippet: 3. Choose Execute .
+4. Perform either of the following tasks:
+•Restart the ...; Source: Unknown, Page: N/A, Snippet: Stewardship for Process Industries  and the tools that are used to configur...; Source: Unknown, Page: N/A, Snippet: 2. In the Namespace  field,  enter the following:
+•/MMHUB  for Central Requ...; Source: Unknown, Page: N/A, Snippet: for Discrete Industries
+For general information, see T roubleshooting [page...; Source: Unknown, Page: N/A, Snippet: Windows Wordprocessor In-
+tegration and ExpertWWI and Expert Server
+Adminis...
+2025-05-16 11:01:02,011 - INFO - app - LLM Answer: 'This question cannot be answered from the given context.  The provided text describes Standard Opera...'
+2025-05-16 11:01:02,012 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:01:02] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:01:17,365 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:01:17] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:01:17,372 - INFO - app - Received question: 'how to login into sap'
+2025-05-16 11:01:18,698 - INFO - app - Retrieved 5 source documents for question: 'how to login into sap'. Details: Source: Unknown, Page: N/A, Snippet: example code unless damages have been caused by SAP's gross negligence or w...; Source: Unknown, Page: N/A, Snippet: agreements with SAP) to this:
+• The content of the linked-to site is not SA...; Source: Unknown, Page: N/A, Snippet: SE (or an SAP affiliate  company) in Germany and other countries. All
+other...; Source: Unknown, Page: N/A, Snippet: optimally. It contains specific  information for various tasks and lists th...; Source: Unknown, Page: N/A, Snippet: Videos Hosted on External Platforms
+Some videos may point to third-party vi...
+2025-05-16 11:01:18,703 - INFO - app - LLM Answer: 'This question cannot be answered from the given context.  The provided text is a legal and operation...'
+2025-05-16 11:01:18,705 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:01:18] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:01:33,022 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:01:33] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:01:33,028 - INFO - app - Received question: 'What is SAP HANA'
+2025-05-16 11:01:34,574 - INFO - app - Retrieved 5 source documents for question: 'What is SAP HANA'. Details: Source: Unknown, Page: N/A, Snippet: •Disaster recovery concept
+•Maximum permissible downtime during restore
+•Am...; Source: Unknown, Page: N/A, Snippet: business functions are available to system users. Strategies for high avail...; Source: Unknown, Page: N/A, Snippet: For SAP S/4HANA Cloud Private Edition, some of the tasks described in this ...; Source: Unknown, Page: N/A, Snippet: Operations Guide
+Business Continuity and High Availability PUBLIC 156 User ...; Source: Unknown, Page: N/A, Snippet: This section of the Operations Guide for SAP S/4HANA contains information a...
+2025-05-16 11:01:34,577 - INFO - app - LLM Answer: 'Based on the provided text, SAP HANA is a database used to run a new installation of SAP S/4HANA.  T...'
+2025-05-16 11:01:34,579 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:01:34] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:02:22,566 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\app.py', reloading
+2025-05-16 11:02:22,718 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\langchain_google_genai\\chat_models.py', reloading
+2025-05-16 11:02:26,360 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:02:31,878 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:02:31,879 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:02:31,908 - INFO - app - LLM initialized successfully.
+2025-05-16 11:02:31,909 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:02:31,931 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:02:31,937 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:02:32,025 - INFO - app - '/api/process_sops' endpoint called. Starting SOP processing...
+2025-05-16 11:02:39,460 - INFO - app - SOP Processing: Loaded 3 documents.
+2025-05-16 11:02:39,486 - INFO - app - SOP Processing: Created 376 text chunks.
+2025-05-16 11:02:39,508 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-16 11:02:39,566 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-16 11:02:39,580 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-16 11:02:39,598 - INFO - app - SOPs processed successfully.
+2025-05-16 11:02:39,601 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:02:39] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-16 11:02:39,615 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:02:39] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:02:39,641 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\pyparsing\\core.py', reloading
+2025-05-16 11:02:39,667 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\app.py', reloading
+2025-05-16 11:02:43,270 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:02:46,708 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:02:46,709 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:02:46,729 - INFO - app - LLM initialized successfully.
+2025-05-16 11:02:46,730 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:02:46,745 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:02:46,751 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:02:47,700 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:02:47] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:02:47,707 - WARNING - app - '/api/ask' called but SOPs not processed or QA chain not initialized.
+2025-05-16 11:02:47,708 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:02:47] "[31m[1mPOST /api/ask HTTP/1.1[0m" 400 -
+2025-05-16 11:03:49,954 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:03:49,955 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:03:49,980 - INFO - app - LLM initialized successfully.
+2025-05-16 11:03:49,980 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:03:50,012 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.155.15.159:5001
+2025-05-16 11:03:50,013 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-16 11:03:50,029 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:03:54,512 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:03:54,514 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:03:54,561 - INFO - app - LLM initialized successfully.
+2025-05-16 11:03:54,562 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:03:54,592 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:03:54,603 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:05:15,922 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:05:15] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:05:15,940 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:05:15] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:05:18,740 - INFO - app - '/api/process_sops' endpoint called. Starting SOP processing...
+2025-05-16 11:05:27,987 - INFO - app - SOP Processing: Loaded 3 documents.
+2025-05-16 11:05:28,018 - INFO - app - SOP Processing: Created 376 text chunks.
+2025-05-16 11:05:28,061 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-16 11:05:28,272 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-16 11:05:28,292 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-16 11:05:28,382 - INFO - app - SOPs processed successfully.
+2025-05-16 11:05:28,384 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:05:28] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-16 11:05:28,401 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:05:28] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:05:38,352 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:05:38] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:05:38,360 - INFO - app - Received question: 'how to login into GRDC'
+2025-05-16 11:05:40,222 - INFO - app - Retrieved 5 source documents for question: 'how to login into GRDC'. Details: Source: Unknown, Page: N/A, Snippet: Stewardship for Process Industries  and the tools that are used to configur...; Source: Unknown, Page: N/A, Snippet: RACC_IMP_ERP_UIDaily or weekly, depending
+on business process and ac-
+count...; Source: Unknown, Page: N/A, Snippet: MDC_HANGING_PROCESS Daily Checks for hanging processes, provides
+the option...; Source: Unknown, Page: N/A, Snippet: Windows Wordprocessor In-
+tegration and ExpertWWI and Expert Server
+Adminis...; Source: Unknown, Page: N/A, Snippet: These activities need to be performed periodically as they affect  the data...
+2025-05-16 11:05:40,224 - INFO - app - LLM Answer: 'This question cannot be answered from the given context.  The provided text does not contain informa...'
+2025-05-16 11:05:40,226 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:05:40] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:05:46,284 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:05:46] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:05:46,289 - INFO - app - Received question: 'How to login'
+2025-05-16 11:05:47,913 - INFO - app - Retrieved 5 source documents for question: 'How to login'. Details: Source: Unknown, Page: N/A, Snippet: Operations Guide
+Business Continuity and High Availability PUBLIC 156 User ...; Source: Unknown, Page: N/A, Snippet: agreements with SAP) to this:
+• The content of the linked-to site is not SA...; Source: Unknown, Page: N/A, Snippet: alert categories are pre-configured  in the HUBERPI add-on:
+Alert Category ...; Source: Unknown, Page: N/A, Snippet: Windows Wordprocessor In-
+tegration and ExpertWWI and Expert Server
+Adminis...; Source: Unknown, Page: N/A, Snippet: cluding the log files.
+Expert ExpAdmin.Exe Used to configure  the Expert
+ru...
+2025-05-16 11:05:47,914 - INFO - app - LLM Answer: 'This document does not contain login instructions.  It refers to SAP user management and authenticat...'
+2025-05-16 11:05:47,915 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:05:47] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:06:00,197 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:06:00] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:06:00,207 - INFO - app - Received question: 'Summarise all the documents'
+2025-05-16 11:06:02,553 - INFO - app - Retrieved 5 source documents for question: 'Summarise all the documents'. Details: Source: Unknown, Page: N/A, Snippet: a full table scan).
+Operations Guide
+SAP S/4HANA Business Applications PUBL...; Source: Unknown, Page: N/A, Snippet: Agriculture ............................................................. 1...; Source: Unknown, Page: N/A, Snippet: PostDocs Immediately Post cash flow  documents immediately in FS-CD
+Post Do...; Source: Unknown, Page: N/A, Snippet: Physical Inventory Documents LIME_PI
+LIME Log Entries (goods movements
+and ...; Source: Unknown, Page: N/A, Snippet: T ransportation Management ...................................................
+2025-05-16 11:06:02,555 - INFO - app - LLM Answer: 'Based on the provided text, the following documents are mentioned:  CACPDFP_TRACE_LOG.log (Project C...'
+2025-05-16 11:06:02,556 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:06:02] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:07:23,629 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:07:23] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:07:23,637 - INFO - app - Received question: 'what is use of hana in finance'
+2025-05-16 11:07:25,704 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\logging\\__init__.py', reloading
+2025-05-16 11:07:25,827 - INFO - app - LLM Answer: 'The provided text mentions using Data Aging in Finance, which involves activating the business funct...'
+2025-05-16 11:07:25,829 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\encodings\\cp1252.py', reloading
+2025-05-16 11:07:25,830 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:07:25] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:07:25,832 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\werkzeug\\debug\\__init__.py', reloading
+2025-05-16 11:07:25,834 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\werkzeug\\serving.py', reloading
+2025-05-16 11:07:25,835 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\http\\server.py', reloading
+2025-05-16 11:07:25,836 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\socketserver.py', reloading
+2025-05-16 11:07:25,838 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\threading.py', reloading
+2025-05-16 11:07:29,559 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:07:33,728 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:07:33,729 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:07:33,755 - INFO - app - LLM initialized successfully.
+2025-05-16 11:07:33,756 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:07:33,775 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:07:33,782 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:08:36,774 - INFO - app - '/api/process_sops' endpoint called. Starting SOP processing...
+2025-05-16 11:08:45,429 - INFO - app - SOP Processing: Loaded 4 documents.
+2025-05-16 11:08:45,521 - INFO - app - SOP Processing: Created 377 text chunks.
+2025-05-16 11:08:45,544 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-16 11:08:45,638 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-16 11:08:45,658 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-16 11:08:45,684 - INFO - app - SOPs processed successfully.
+2025-05-16 11:08:45,687 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:08:45] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-16 11:08:45,706 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:08:45] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:08:54,776 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:08:54] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:08:54,784 - INFO - app - Received question: 'Who is leaving GRDC'
+2025-05-16 11:08:56,685 - INFO - app - Retrieved 5 source documents for question: 'Who is leaving GRDC'. Details: Source: Unknown, Page: N/A, Snippet: MDC_HANGING_PROCESS Daily Checks for hanging processes, provides
+the option...; Source: Unknown, Page: N/A, Snippet: Periodic Tasks for Master Data Governance
+Program Name/Task Recommended Fre...; Source: Unknown, Page: N/A, Snippet: MDG uses the bgRFC (Background Remote Function Call) to schedule background...; Source: Unknown, Page: N/A, Snippet: Stewardship for Process Industries  and the tools that are used to configur...; Source: Unknown, Page: N/A, Snippet: These activities need to be performed periodically as they affect  the data...
+2025-05-16 11:08:56,686 - INFO - app - LLM Answer: 'This question cannot be answered from the given context.  The provided text focuses on Standard Oper...'
+2025-05-16 11:08:56,688 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:08:56] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:09:59,768 - INFO - app - '/api/process_sops' endpoint called. Starting SOP processing...
+2025-05-16 11:09:59,776 - INFO - app - SOP Processing: Loaded 1 documents.
+2025-05-16 11:09:59,785 - INFO - app - SOP Processing: Created 1 text chunks.
+2025-05-16 11:09:59,830 - INFO - app - SOPs processed successfully.
+2025-05-16 11:09:59,832 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:09:59] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-16 11:09:59,856 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:09:59] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:10:23,227 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:10:23] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:10:23,244 - INFO - app - Received question: 'Summarise all documents'
+2025-05-16 11:10:26,507 - INFO - app - Retrieved 5 source documents for question: 'Summarise all documents'. Details: Source: Unknown, Page: N/A, Snippet: a full table scan).
+Operations Guide
+SAP S/4HANA Business Applications PUBL...; Source: Unknown, Page: N/A, Snippet: PostDocs Immediately Post cash flow  documents immediately in FS-CD
+Post Do...; Source: Unknown, Page: N/A, Snippet: Agriculture ............................................................. 1...; Source: Unknown, Page: N/A, Snippet: Physical Inventory Documents LIME_PI
+LIME Log Entries (goods movements
+and ...; Source: Unknown, Page: N/A, Snippet: formance Documents and Time & At-
+tendance entries that were deleted
+manual...
+2025-05-16 11:10:26,510 - INFO - app - LLM Answer: 'The provided text mentions several types of documents: cash flow documents (posted immediately or in...'
+2025-05-16 11:10:26,512 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:10:26] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:10:40,976 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:10:40] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:10:40,983 - INFO - app - Received question: 'who is leaving GRDC'
+2025-05-16 11:10:42,488 - INFO - app - Retrieved 5 source documents for question: 'who is leaving GRDC'. Details: Source: Unknown, Page: N/A, Snippet: MDC_HANGING_PROCESS Daily Checks for hanging processes, provides
+the option...; Source: Unknown, Page: N/A, Snippet: Periodic Tasks for Master Data Governance
+Program Name/Task Recommended Fre...; Source: Unknown, Page: N/A, Snippet: MDG uses the bgRFC (Background Remote Function Call) to schedule background...; Source: Unknown, Page: N/A, Snippet: These activities need to be performed periodically as they affect  the data...; Source: Unknown, Page: N/A, Snippet: Stewardship for Process Industries  and the tools that are used to configur...
+2025-05-16 11:10:42,490 - INFO - app - LLM Answer: 'This question cannot be answered from the given context.  The provided text describes Standard Opera...'
+2025-05-16 11:10:42,492 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:10:42] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:11:47,286 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:11:47,287 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:11:47,319 - INFO - app - LLM initialized successfully.
+2025-05-16 11:11:47,320 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:11:47,359 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.155.15.159:5001
+2025-05-16 11:11:47,360 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-16 11:11:47,378 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:11:50,164 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:11:50,165 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:11:50,185 - INFO - app - LLM initialized successfully.
+2025-05-16 11:11:50,186 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:11:50,202 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:11:50,209 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:12:23,042 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:12:23] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:12:23,047 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:12:23] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:12:25,147 - INFO - app - '/api/process_sops' endpoint called. Starting SOP processing...
+2025-05-16 11:12:25,521 - INFO - app - SOP Processing: Loaded 1 documents.
+2025-05-16 11:12:25,523 - INFO - app - SOP Processing: Created 4 text chunks.
+2025-05-16 11:12:25,545 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-16 11:12:25,610 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-16 11:12:25,625 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-16 11:12:25,644 - INFO - app - SOPs processed successfully.
+2025-05-16 11:12:25,646 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:12:25] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-16 11:12:25,910 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:12:25] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:12:32,522 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:12:32] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:12:32,531 - INFO - app - Received question: 'GRDC'
+2025-05-16 11:12:35,979 - INFO - app - Retrieved 5 source documents for question: 'GRDC'. Details: Source: Unknown, Page: N/A, Snippet: MDC_HANGING_PROCESS Daily Checks for hanging processes, provides
+the option...; Source: Unknown, Page: N/A, Snippet: MDG uses the bgRFC (Background Remote Function Call) to schedule background...; Source: Unknown, Page: N/A, Snippet: These activities need to be performed periodically as they affect  the data...; Source: Unknown, Page: N/A, Snippet: Periodic Tasks for Master Data Governance
+Program Name/Task Recommended Fre...; Source: Unknown, Page: N/A, Snippet: 10.5.2   Specific  Monitoring Information for Supplier
+Information and Mast...
+2025-05-16 11:12:35,982 - INFO - app - LLM Answer: 'The provided text does not contain information about GRDC....'
+2025-05-16 11:12:35,983 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:12:35] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:12:45,948 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:12:45] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:12:45,955 - INFO - app - Received question: 'login'
+2025-05-16 11:12:47,856 - INFO - app - Retrieved 5 source documents for question: 'login'. Details: Source: Unknown, Page: N/A, Snippet: agreements with SAP) to this:
+• The content of the linked-to site is not SA...; Source: Unknown, Page: N/A, Snippet: Operations Guide
+Business Continuity and High Availability PUBLIC 156 User ...; Source: Unknown, Page: N/A, Snippet: alert categories are pre-configured  in the HUBERPI add-on:
+Alert Category ...; Source: Unknown, Page: N/A, Snippet: example code unless damages have been caused by SAP's gross negligence or w...; Source: Unknown, Page: N/A, Snippet: maintain the SAP Commissions domain in the Filter Entries  field.
+22 PUBLIC...
+2025-05-16 11:12:47,859 - INFO - app - LLM Answer: 'The provided text mentions using transaction `SLG1` to access the application log, which records all...'
+2025-05-16 11:12:47,862 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:12:47] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:13:24,743 - INFO - _internal -  * Detected change in 'C:\\Program Files\\Python313\\Lib\\pickle.py', reloading
+2025-05-16 11:13:27,846 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:13:31,400 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:13:31,402 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:13:31,440 - INFO - app - LLM initialized successfully.
+2025-05-16 11:13:31,441 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:13:31,466 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:13:31,479 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:38:15,488 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:38:15,489 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:38:15,512 - INFO - app - LLM initialized successfully.
+2025-05-16 11:38:15,513 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:38:15,544 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.155.15.159:5001
+2025-05-16 11:38:15,545 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-16 11:38:15,559 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:38:18,571 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:38:18,572 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:38:18,608 - INFO - app - LLM initialized successfully.
+2025-05-16 11:38:18,609 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:38:18,629 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:38:18,636 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:38:28,434 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:38:28] "[33mGET /?vscodeBrowserReqId=1747375708381 HTTP/1.1[0m" 404 -
+2025-05-16 11:39:14,069 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:39:14] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:39:14,260 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:39:14] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:39:17,302 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-16 11:39:17,303 - INFO - app - Previous application state for SOPs cleared.
+2025-05-16 11:39:17,836 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-16 11:39:17,839 - INFO - app - Successfully created 5 text chunks.
+2025-05-16 11:39:17,873 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-16 11:39:18,102 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-16 11:39:18,129 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-16 11:39:18,154 - INFO - app - Vector store created successfully.
+2025-05-16 11:39:18,165 - INFO - app - LLM obtained successfully.
+2025-05-16 11:39:18,182 - ERROR - app - Failed to create conversational QA chain.
+2025-05-16 11:39:18,184 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:39:18] "[35m[1mPOST /api/process_sops HTTP/1.1[0m" 500 -
+2025-05-16 11:39:28,980 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-16 11:39:28,983 - INFO - app - Previous application state for SOPs cleared.
+2025-05-16 11:39:29,353 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-16 11:39:29,355 - INFO - app - Successfully created 5 text chunks.
+2025-05-16 11:39:29,381 - INFO - app - Vector store created successfully.
+2025-05-16 11:39:29,389 - INFO - app - LLM obtained successfully.
+2025-05-16 11:39:29,395 - ERROR - app - Failed to create conversational QA chain.
+2025-05-16 11:39:29,397 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:39:29] "[35m[1mPOST /api/process_sops HTTP/1.1[0m" 500 -
+2025-05-16 11:39:32,159 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-16 11:39:32,162 - INFO - app - Previous application state for SOPs cleared.
+2025-05-16 11:39:32,486 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-16 11:39:32,488 - INFO - app - Successfully created 5 text chunks.
+2025-05-16 11:39:32,518 - INFO - app - Vector store created successfully.
+2025-05-16 11:39:32,529 - INFO - app - LLM obtained successfully.
+2025-05-16 11:39:32,534 - ERROR - app - Failed to create conversational QA chain.
+2025-05-16 11:39:32,536 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:39:32] "[35m[1mPOST /api/process_sops HTTP/1.1[0m" 500 -
+2025-05-16 11:39:33,776 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-16 11:39:33,779 - INFO - app - Previous application state for SOPs cleared.
+2025-05-16 11:39:34,093 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-16 11:39:34,095 - INFO - app - Successfully created 5 text chunks.
+2025-05-16 11:39:34,112 - INFO - app - Vector store created successfully.
+2025-05-16 11:39:34,117 - INFO - app - LLM obtained successfully.
+2025-05-16 11:39:34,120 - ERROR - app - Failed to create conversational QA chain.
+2025-05-16 11:39:34,122 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:39:34] "[35m[1mPOST /api/process_sops HTTP/1.1[0m" 500 -
+2025-05-16 11:40:49,044 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\app.py', reloading
+2025-05-16 11:40:49,047 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\app.py', reloading
+2025-05-16 11:40:51,886 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:40:56,169 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:40:56,170 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:40:56,203 - INFO - app - LLM initialized successfully.
+2025-05-16 11:40:56,203 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:40:56,224 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:40:56,232 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:41:05,158 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-16 11:41:05,159 - INFO - app - Previous application state for SOPs cleared.
+2025-05-16 11:41:05,636 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-16 11:41:05,640 - INFO - app - Successfully created 5 text chunks.
+2025-05-16 11:41:05,666 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-16 11:41:05,757 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-16 11:41:05,782 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-16 11:41:05,798 - INFO - app - Vector store created successfully.
+2025-05-16 11:41:05,808 - INFO - app - LLM obtained successfully.
+2025-05-16 11:41:05,814 - INFO - app - Conversational QA chain created successfully.
+2025-05-16 11:41:05,815 - INFO - app - SOP processing complete. Docs: 2, Chunks: 5. QA chain is ready.
+2025-05-16 11:41:05,820 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:41:05] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-16 11:41:05,844 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:41:05] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:41:12,569 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:41:12] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:41:12,576 - INFO - app - Received question: 'Who is tsering'
+2025-05-16 11:41:14,425 - INFO - app - Retrieved 5 source documents for question: 'Who is tsering'. Details: Source: Unknown, Page: N/A, Snippet: agement (TM).
+Data Archiving Occasionally, for example,
+weeklyFor more info...; Source: Unknown, Page: N/A, Snippet: Overview of T race and Log
+Files [page 67] )
+SAP_EHFND_PCEP (report
+R_EHFND...; Source: Unknown, Page: N/A, Snippet: SE (or an SAP affiliate  company) in Germany and other countries. All
+other...; Source: Unknown, Page: N/A, Snippet: Interaction Center ...........................................................; Source: Unknown, Page: N/A, Snippet: ity or Error Han-
+dling ProcedureResponsibility
+Versions of opti-
+mizersrcc...
+2025-05-16 11:41:14,429 - INFO - app - LLM Answer: 'The provided text does not contain the answer to who is "tsering"....'
+2025-05-16 11:41:14,431 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:41:14] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:41:51,813 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:41:51] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:41:51,819 - INFO - app - Received question: 'Give me example for POC'
+2025-05-16 11:41:53,468 - INFO - app - Retrieved 5 source documents for question: 'Give me example for POC'. Details: Source: Unknown, Page: N/A, Snippet: Foundation for Product Compliance
+  Process
+Foundation
+  Specify Process De...; Source: Unknown, Page: N/A, Snippet: Industries . For more generic information, see Management of SAP S/4HANA [p...; Source: Unknown, Page: N/A, Snippet: or the technical view. The technical view contains additional options for d...; Source: Unknown, Page: N/A, Snippet: BOPF  (Business Object Proc-
+essing Framework)BOBT T est UI for BOPF
+Y ou c...; Source: Unknown, Page: N/A, Snippet: EHPRC_PFR (Product Com-
+pliance - SpreadsheetADMIN Log for Administrators
+D...
+2025-05-16 11:41:53,470 - INFO - app - LLM Answer: 'This document does not provide examples for POC (Proof of Concept).  It describes how to access proc...'
+2025-05-16 11:41:53,473 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:41:53] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:43:36,582 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\app.py', reloading
+2025-05-16 11:43:36,585 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\app.py', reloading
+2025-05-16 11:43:39,335 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:43:43,492 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:43:43,495 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:43:43,549 - INFO - app - LLM initialized successfully.
+2025-05-16 11:43:43,550 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:43:43,587 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:43:43,600 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:45:31,742 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:45:31,743 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:45:31,767 - INFO - app - LLM initialized successfully.
+2025-05-16 11:45:31,767 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:45:31,803 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.155.15.159:5001
+2025-05-16 11:45:31,804 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-16 11:45:31,824 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:45:34,690 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:45:34,691 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:45:34,715 - INFO - app - LLM initialized successfully.
+2025-05-16 11:45:34,716 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:45:34,733 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:45:34,739 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:46:00,918 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:46:00] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:46:00,924 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:46:00] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:46:03,744 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-16 11:46:03,745 - INFO - app - Previous application state for SOPs cleared.
+2025-05-16 11:46:04,172 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-16 11:46:04,175 - INFO - app - Successfully created 5 text chunks.
+2025-05-16 11:46:04,194 - ERROR - app - Failed to create vector store.
+2025-05-16 11:46:04,198 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:46:04] "[35m[1mPOST /api/process_sops HTTP/1.1[0m" 500 -
+2025-05-16 11:46:06,558 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-16 11:46:06,560 - INFO - app - Previous application state for SOPs cleared.
+2025-05-16 11:46:06,828 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-16 11:46:06,831 - INFO - app - Successfully created 5 text chunks.
+2025-05-16 11:46:06,846 - ERROR - app - Failed to create vector store.
+2025-05-16 11:46:06,849 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:46:06] "[35m[1mPOST /api/process_sops HTTP/1.1[0m" 500 -
+2025-05-16 11:47:25,527 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:47:25,528 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:47:25,556 - INFO - app - LLM initialized successfully.
+2025-05-16 11:47:25,557 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:47:25,593 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.155.15.159:5001
+2025-05-16 11:47:25,594 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-16 11:47:25,616 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:47:28,542 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:47:28,543 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:47:28,568 - INFO - app - LLM initialized successfully.
+2025-05-16 11:47:28,569 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:47:28,585 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:47:28,591 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:47:56,359 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:47:56] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:47:56,361 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:47:56] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:47:59,137 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-16 11:47:59,138 - INFO - app - Previous application state for SOPs cleared.
+2025-05-16 11:47:59,674 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-16 11:47:59,676 - INFO - app - Successfully created 5 text chunks.
+2025-05-16 11:48:00,775 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-16 11:48:00,863 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-16 11:48:00,888 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-16 11:48:00,905 - INFO - app - Vector store created successfully.
+2025-05-16 11:48:00,914 - INFO - app - LLM obtained successfully.
+2025-05-16 11:48:00,917 - INFO - app - Conversational QA chain created successfully.
+2025-05-16 11:48:00,918 - INFO - app - SOP processing complete. Docs: 2, Chunks: 5. QA chain is ready.
+2025-05-16 11:48:00,921 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:48:00] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-16 11:48:00,939 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:48:00] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:48:11,120 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:48:11] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:48:11,128 - INFO - app - Received question: 'who is tsering'
+2025-05-16 11:48:12,534 - INFO - app - Retrieved 5 source documents for question: 'who is tsering'. Details: Source: Unknown, Page: N/A, Snippet: Tsering is president of India...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...
+2025-05-16 11:48:12,540 - INFO - app - LLM Answer: 'The provided text states that Tsering is the president of India....'
+2025-05-16 11:48:12,542 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:48:12] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:48:48,726 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:48:48] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:48:48,734 - INFO - app - Received question: 'how to login grdc'
+2025-05-16 11:48:51,672 - INFO - app - Retrieved 5 source documents for question: 'how to login grdc'. Details: Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...; Source: Unknown, Page: N/A, Snippet: Tsering is president of India...
+2025-05-16 11:48:51,677 - INFO - app - LLM Answer: 'Based on the provided text, to log in to GRDC, follow these steps:
+
+1.  Reset Global Parameter in GR...'
+2025-05-16 11:48:51,679 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:48:51] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:50:35,619 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:50:35,620 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:50:35,648 - INFO - app - LLM initialized successfully.
+2025-05-16 11:50:35,649 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:50:35,683 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.155.15.159:5001
+2025-05-16 11:50:35,684 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-16 11:50:35,702 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-16 11:50:39,266 - INFO - app - Flask app starting: API key loaded.
+2025-05-16 11:50:39,267 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-16 11:50:39,293 - INFO - app - LLM initialized successfully.
+2025-05-16 11:50:39,294 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-16 11:50:39,314 - WARNING - _internal -  * Debugger is active!
+2025-05-16 11:50:39,323 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-16 11:51:00,376 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:51:00] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:51:00,389 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:51:00] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:51:02,490 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-16 11:51:02,491 - INFO - app - Previous application state for SOPs cleared.
+2025-05-16 11:51:02,904 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-16 11:51:02,907 - INFO - app - Successfully created 5 text chunks.
+2025-05-16 11:51:03,837 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-16 11:51:03,920 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-16 11:51:03,940 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-16 11:51:03,953 - INFO - app - Vector store created successfully.
+2025-05-16 11:51:03,961 - INFO - app - LLM obtained successfully.
+2025-05-16 11:51:03,965 - INFO - app - Conversational QA chain created successfully.
+2025-05-16 11:51:03,966 - INFO - app - SOP processing complete. Docs: 2, Chunks: 5. QA chain is ready.
+2025-05-16 11:51:03,968 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:51:03] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-16 11:51:03,987 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:51:03] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:51:19,021 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:51:19] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:51:19,028 - INFO - app - Received question: 'how to login into grdc'
+2025-05-16 11:51:21,794 - INFO - app - Retrieved 5 source documents for question: 'how to login into grdc'. Details: Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...; Source: Unknown, Page: N/A, Snippet: Tsering is president of India...
+2025-05-16 11:51:21,798 - INFO - app - LLM Answer: 'Based on the provided text, to log in to GRDC:
+
+1.  **If you have a GRDC User ID:** Follow steps 1-8...'
+2025-05-16 11:51:21,799 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:51:21] "POST /api/ask HTTP/1.1" 200 -

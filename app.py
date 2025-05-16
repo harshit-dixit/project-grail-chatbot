@@ -4,6 +4,7 @@ from flask_cors import CORS
 import traceback
 import logging
 import config
+from langchain_core.documents import Document
 
 # Project-specific modules
 from utils import load_documents_from_sops_dir, get_text_chunks
@@ -83,74 +84,95 @@ def process_sops():
     """Loads SOP documents, creates vector store, and initializes QA chain."""
     if not app_state["api_key_loaded"]:
         logger.warning("process_sops called but API key not loaded.")
-        return jsonify({"success": False, "message": "API key not loaded. Please check backend logs."}), 500
+        return jsonify({"success": False, "message": "API key not loaded. Please check backend logs.", "docs_count": 0, "chunks_count": 0}), 500
 
     try:
-        logger.info("'/api/process_sops' endpoint called. Starting SOP processing...")
-        app_state["sops_processed"] = False # Reset status before processing
-        documents_data = load_documents_from_sops_dir()
+        logger.info("'/api/process_sops' endpoint called. Attempting to refresh knowledge base.")
+        
+        # Explicitly clear old state to ensure a full refresh
+        app_state["vector_store"] = None
+        app_state["qa_chain"] = None
+        app_state["sops_processed"] = False
+        app_state["processed_docs_count"] = 0
+        app_state["processed_chunks_count"] = 0
+        app_state["error_message"] = None
+        logger.info("Previous application state for SOPs cleared.")
+
+        documents_data = load_documents_from_sops_dir() # This function should log files it finds/doesn't find
+        
         if not documents_data:
-            app_state["error_message"] = "No documents found in 'sops' directory or failed to load."
-            logger.warning(f"SOP Processing: {app_state['error_message']}")
-            return jsonify({"success": False, "message": app_state["error_message"]}), 400
-        
+            app_state["error_message"] = "No documents found in 'sops' directory or failed to load any."
+            logger.warning(app_state["error_message"])
+            return jsonify({"success": False, "message": app_state["error_message"], "docs_count": 0, "chunks_count": 0}), 200
+
+        logger.info(f"Successfully loaded {len(documents_data)} documents from '{config.SOP_DIR_PATH}'.")
         app_state["processed_docs_count"] = len(documents_data)
-        logger.info(f"SOP Processing: Loaded {app_state['processed_docs_count']} documents.")
-        # Correctly call get_text_chunks with the list of document data
-        all_text_chunks = get_text_chunks(documents_data)
-        
-        app_state["processed_chunks_count"] = len(all_text_chunks)
-        logger.info(f"SOP Processing: Created {app_state['processed_chunks_count']} text chunks.")
-        if not all_text_chunks:
-            app_state["error_message"] = "Documents were found but produced no text chunks for processing."
-            logger.warning(f"SOP Processing: {app_state['error_message']}")
-            return jsonify({"success": False, "message": app_state["error_message"]}), 400
 
-        # Unpack the result from create_vector_store
-        vector_store_object, stored_text_chunks_data = create_vector_store(all_text_chunks)
+        text_chunks_with_source = get_text_chunks(documents_data)
+        if not text_chunks_with_source:
+            app_state["error_message"] = "Failed to create text chunks from the loaded documents."
+            logger.warning(app_state["error_message"])
+            return jsonify({"success": False, "message": app_state["error_message"], "docs_count": app_state["processed_docs_count"], "chunks_count": 0}), 200
+
+        # Extract 'content' for FAISS and keep 'metadata' for LangChain Document objects
+        # Assuming get_text_chunks returns a list of dicts like {'source': 'doc_name', 'content': 'chunk_text', 'chunk_id': 'some_id'}
+        # And vector_store_manager.create_vector_store expects a list of LangChain Document objects
+        langchain_documents = []
+        for chunk_data in text_chunks_with_source:
+            metadata = {"source": chunk_data.get('source', 'Unknown'), 
+                        "chunk_id": chunk_data.get('chunk_id', 'Unknown')}
+            # Add any other metadata parts you expect, e.g., page numbers if available
+            if 'file_name' in chunk_data.get('metadata', {}): # Compatibility with older structure from ask_question
+                metadata['file_name'] = chunk_data['metadata']['file_name']
+            if 'page' in chunk_data.get('metadata', {}):
+                metadata['page'] = chunk_data['metadata']['page']
+            langchain_documents.append(Document(page_content=chunk_data['content'], metadata=metadata))
+
+        app_state["processed_chunks_count"] = len(langchain_documents)
+        logger.info(f"Successfully created {app_state['processed_chunks_count']} text chunks.")
+
+        vector_store_object, returned_chunks_data = create_vector_store(langchain_documents, force_recreate=True) 
         app_state["vector_store"] = vector_store_object
-        # Optionally, store stored_text_chunks_data if needed elsewhere in app_state
-        # app_state["stored_text_chunks"] = stored_text_chunks_data
-
-        if not app_state["vector_store"]:
-            app_state["error_message"] = "Failed to create or retrieve vector store from chunks."
-            logger.error(f"SOP Processing: {app_state['error_message']}")
-            return jsonify({"success": False, "message": app_state["error_message"]}), 500
-
-        llm = get_llm()
-        if not llm:
-            app_state["error_message"] = "Failed to get LLM for QA chain."
-            logger.error(f"SOP Processing: {app_state['error_message']}")
-            return jsonify({"success": False, "message": app_state["error_message"]}), 500
         
-        # Ensure the retriever is correctly created from the vector store
-        retriever = get_retriever(app_state["vector_store"])
-        if not retriever:
-            app_state["error_message"] = "Failed to create retriever from vector store."
-            logger.error(f"SOP Processing: {app_state['error_message']}")
-            return jsonify({"success": False, "message": app_state["error_message"]}), 500
+        if not app_state["vector_store"]:
+            app_state["error_message"] = "Failed to create vector store."
+            logger.error(app_state["error_message"])
+            return jsonify({"success": False, "message": app_state["error_message"], "docs_count": app_state["processed_docs_count"], "chunks_count": app_state["processed_chunks_count"]}), 500
+        logger.info("Vector store created successfully.")
 
+        llm = get_llm() # Ensure LLM is available
+        if not llm:
+            app_state["error_message"] = "LLM not available. Cannot create QA chain."
+            logger.error(app_state["error_message"])
+            return jsonify({"success": False, "message": app_state["error_message"], "docs_count": app_state["processed_docs_count"], "chunks_count": app_state["processed_chunks_count"]}), 500
+        logger.info("LLM obtained successfully.")
+
+        retriever = get_retriever(app_state["vector_store"])
         app_state["qa_chain"] = get_conversational_chain(llm, retriever)
         if not app_state["qa_chain"]:
             app_state["error_message"] = "Failed to create conversational QA chain."
-            logger.error(f"SOP Processing: {app_state['error_message']}")
-            return jsonify({"success": False, "message": app_state["error_message"]}), 500
+            logger.error(app_state["error_message"])
+            return jsonify({"success": False, "message": app_state["error_message"], "docs_count": app_state["processed_docs_count"], "chunks_count": app_state["processed_chunks_count"]}), 500
+        logger.info("Conversational QA chain created successfully.")
 
         app_state["sops_processed"] = True
-        app_state["error_message"] = None # Clear previous errors
-        logger.info("SOPs processed successfully.")
+        app_state["error_message"] = None 
+        logger.info(f"SOP processing complete. Docs: {app_state['processed_docs_count']}, Chunks: {app_state['processed_chunks_count']}. QA chain is ready.")
         return jsonify({
             "success": True, 
             "message": "SOPs processed successfully.",
-            "processed_docs_count": app_state["processed_docs_count"],
-            "processed_chunks_count": app_state["processed_chunks_count"]
-        })
-
+            "docs_count": app_state["processed_docs_count"],
+            "chunks_count": app_state["processed_chunks_count"]
+        }), 200
+    
     except Exception as e:
-        app_state["sops_processed"] = False
+        app_state["sops_processed"] = False # Ensure it's marked as not processed on any error
         app_state["error_message"] = f"Error processing SOPs: {str(e)}"
         logger.error(f"Error in /api/process_sops: {e}", exc_info=True)
-        return jsonify({"success": False, "message": app_state["error_message"]}), 500
+        # Return counts as 0 if error occurred before they were determined
+        doc_count = app_state.get("processed_docs_count", 0)
+        chunk_count = app_state.get("processed_chunks_count", 0)
+        return jsonify({"success": False, "message": app_state["error_message"], "docs_count": doc_count, "chunks_count": chunk_count}), 500
 
 @app.route('/api/ask', methods=['POST'])
 def ask_question():

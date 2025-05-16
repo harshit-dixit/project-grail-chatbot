@@ -47,8 +47,8 @@ def create_vector_store(text_chunks_data, force_recreate=False):
     print("Creating new vector store...")
     try:
         embeddings = get_embeddings_model()
-        contents = [chunk['content'] for chunk in text_chunks_data]
-        metadatas = [{'source': chunk['source'], 'chunk_id': chunk['chunk_id']} for chunk in text_chunks_data]
+        contents = [chunk.page_content for chunk in text_chunks_data]
+        metadatas = [chunk.metadata for chunk in text_chunks_data]
         
         vector_store = FAISS.from_texts(texts=contents, embedding=embeddings, metadatas=metadatas)
         vector_store.save_local(VECTOR_STORE_DIR, index_name="sop_index")
