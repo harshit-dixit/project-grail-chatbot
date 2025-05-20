@@ -684,3 +684,449 @@ e) Fallback Handling.
 
 1.  **If you have a GRDC User ID:** Follow steps 1-8...'
 2025-05-16 11:51:21,799 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:51:21] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:57:50,876 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:57:50] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:57:50,884 - INFO - app - Received question: 'who is tsering'
+2025-05-16 11:57:54,095 - INFO - app - Retrieved 5 source documents for question: 'who is tsering'. Details: Source: Unknown, Page: N/A, Snippet: Tsering is president of India...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...
+2025-05-16 11:57:54,098 - INFO - app - LLM Answer: 'The provided text states that Tsering is the president of India....'
+2025-05-16 11:57:54,100 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:57:54] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:58:34,462 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-16 11:58:34,463 - INFO - app - Previous application state for SOPs cleared.
+2025-05-16 11:58:34,607 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-16 11:58:34,609 - INFO - app - Successfully created 5 text chunks.
+2025-05-16 11:58:35,559 - INFO - app - Vector store created successfully.
+2025-05-16 11:58:35,566 - INFO - app - LLM obtained successfully.
+2025-05-16 11:58:35,569 - INFO - app - Conversational QA chain created successfully.
+2025-05-16 11:58:35,570 - INFO - app - SOP processing complete. Docs: 2, Chunks: 5. QA chain is ready.
+2025-05-16 11:58:35,571 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:58:35] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-16 11:58:35,593 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:58:35] "GET /api/status HTTP/1.1" 200 -
+2025-05-16 11:58:46,990 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:58:46] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:58:46,998 - INFO - app - Received question: 'who is jai jagannath'
+2025-05-16 11:58:48,363 - INFO - app - Retrieved 5 source documents for question: 'who is jai jagannath'. Details: Source: Unknown, Page: N/A, Snippet: Tsering is president of India
+Saubhagya is Jai Jagannath...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...
+2025-05-16 11:58:48,366 - INFO - app - LLM Answer: 'Saubhagya is Jai Jagannath....'
+2025-05-16 11:58:48,368 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:58:48] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:59:13,155 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:59:13] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:59:13,161 - INFO - app - Received question: 'who is saubhagya'
+2025-05-16 11:59:14,475 - INFO - app - Retrieved 5 source documents for question: 'who is saubhagya'. Details: Source: Unknown, Page: N/A, Snippet: Tsering is president of India
+Saubhagya is Jai Jagannath...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...
+2025-05-16 11:59:14,480 - INFO - app - LLM Answer: 'Saubhagya is Jai Jagannath....'
+2025-05-16 11:59:14,482 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:59:14] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:59:24,146 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:59:24] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:59:24,153 - INFO - app - Received question: 'who is jai'
+2025-05-16 11:59:25,431 - INFO - app - Retrieved 5 source documents for question: 'who is jai'. Details: Source: Unknown, Page: N/A, Snippet: Tsering is president of India
+Saubhagya is Jai Jagannath...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...
+2025-05-16 11:59:25,435 - INFO - app - LLM Answer: 'Based on the provided text, Jai Jagannath is Saubhagya....'
+2025-05-16 11:59:25,437 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:59:25] "POST /api/ask HTTP/1.1" 200 -
+2025-05-16 11:59:38,717 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:59:38] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-16 11:59:38,723 - INFO - app - Received question: 'what jai is doing?'
+2025-05-16 11:59:40,280 - INFO - app - Retrieved 5 source documents for question: 'what jai is doing?'. Details: Source: Unknown, Page: N/A, Snippet: Tsering is president of India
+Saubhagya is Jai Jagannath...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...
+2025-05-16 11:59:40,284 - INFO - app - LLM Answer: 'Based on the provided text, Saubhagya is Jai Jagannath.  There is no further information about what ...'
+2025-05-16 11:59:40,286 - INFO - _internal - 127.0.0.1 - - [16/May/2025 11:59:40] "POST /api/ask HTTP/1.1" 200 -
+2025-05-19 12:13:07,631 - INFO - app - Flask app starting: API key loaded.
+2025-05-19 12:13:07,634 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-19 12:13:07,783 - INFO - app - LLM initialized successfully.
+2025-05-19 12:13:07,786 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-19 12:13:08,003 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://10.155.29.80:5001
+2025-05-19 12:13:08,005 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-19 12:13:08,150 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-19 12:13:10,969 - INFO - app - Flask app starting: API key loaded.
+2025-05-19 12:13:10,970 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-19 12:13:10,997 - INFO - app - LLM initialized successfully.
+2025-05-19 12:13:10,998 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-19 12:13:11,018 - WARNING - _internal -  * Debugger is active!
+2025-05-19 12:13:11,026 - INFO - _internal -  * Debugger PIN: 134-391-046
+2025-05-19 12:14:19,825 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:14:19] "GET /api/status HTTP/1.1" 200 -
+2025-05-19 12:14:19,827 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:14:19] "GET /api/status HTTP/1.1" 200 -
+2025-05-19 12:15:25,191 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-19 12:15:25,193 - INFO - app - Previous application state for SOPs cleared.
+2025-05-19 12:15:25,674 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-19 12:15:25,679 - INFO - app - Successfully created 5 text chunks.
+2025-05-19 12:15:28,231 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-19 12:15:28,765 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-19 12:15:28,833 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-19 12:15:28,849 - INFO - app - Vector store created successfully.
+2025-05-19 12:15:28,860 - INFO - app - LLM obtained successfully.
+2025-05-19 12:15:28,865 - INFO - app - Conversational QA chain created successfully.
+2025-05-19 12:15:28,866 - INFO - app - SOP processing complete. Docs: 2, Chunks: 5. QA chain is ready.
+2025-05-19 12:15:28,868 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:15:28] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-19 12:15:28,890 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:15:28] "GET /api/status HTTP/1.1" 200 -
+2025-05-19 12:16:03,747 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:16:03] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-19 12:16:03,757 - INFO - app - Received question: 'how to login into grdc'
+2025-05-19 12:16:09,231 - INFO - app - Retrieved 5 source documents for question: 'how to login into grdc'. Details: Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...; Source: Unknown, Page: N/A, Snippet: Tsering is president of India
+Saubhagya is Jai Jagannath...
+2025-05-19 12:16:09,236 - INFO - app - LLM Answer: 'Based on the provided SOPs, to log in to GRDC:
+
+1.  **If you don't have a GRDC user ID:** Raise a re...'
+2025-05-19 12:16:09,239 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:16:09] "POST /api/ask HTTP/1.1" 200 -
+2025-05-19 12:16:47,627 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:16:47] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-19 12:16:47,633 - INFO - app - Received question: 'who is saubhagya'
+2025-05-19 12:16:48,791 - INFO - app - Retrieved 5 source documents for question: 'who is saubhagya'. Details: Source: Unknown, Page: N/A, Snippet: Tsering is president of India
+Saubhagya is Jai Jagannath...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...
+2025-05-19 12:16:48,796 - INFO - app - LLM Answer: 'Saubhagya is Jai Jagannath....'
+2025-05-19 12:16:48,799 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:16:48] "POST /api/ask HTTP/1.1" 200 -
+2025-05-19 12:18:21,369 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:18:21] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-19 12:18:21,375 - INFO - app - Received question: 'who is tsering'
+2025-05-19 12:18:22,637 - INFO - app - Retrieved 5 source documents for question: 'who is tsering'. Details: Source: Unknown, Page: N/A, Snippet: Tsering is president of India
+Saubhagya is Jai Jagannath...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...
+2025-05-19 12:18:22,643 - INFO - app - LLM Answer: 'Based on the provided text, Tsering is the president of India....'
+2025-05-19 12:18:22,645 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:18:22] "POST /api/ask HTTP/1.1" 200 -
+2025-05-19 12:20:51,567 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:20:51] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-19 12:20:51,573 - INFO - app - Received question: 'what is frc'
+2025-05-19 12:20:52,965 - INFO - app - Retrieved 5 source documents for question: 'what is frc'. Details: Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...; Source: Unknown, Page: N/A, Snippet: Tsering is president of India
+Saubhagya is Jai Jagannath...
+2025-05-19 12:20:52,970 - INFO - app - LLM Answer: 'The provided text does not contain the definition or mention of "FRC"....'
+2025-05-19 12:20:52,973 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:20:52] "POST /api/ask HTTP/1.1" 200 -
+2025-05-19 12:20:58,201 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-19 12:20:58,203 - INFO - app - Previous application state for SOPs cleared.
+2025-05-19 12:20:58,487 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-19 12:20:58,489 - INFO - app - Successfully created 5 text chunks.
+2025-05-19 12:20:59,546 - INFO - app - Vector store created successfully.
+2025-05-19 12:20:59,555 - INFO - app - LLM obtained successfully.
+2025-05-19 12:20:59,558 - INFO - app - Conversational QA chain created successfully.
+2025-05-19 12:20:59,559 - INFO - app - SOP processing complete. Docs: 2, Chunks: 5. QA chain is ready.
+2025-05-19 12:20:59,562 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:20:59] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-19 12:20:59,584 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:20:59] "GET /api/status HTTP/1.1" 200 -
+2025-05-19 12:21:05,630 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:21:05] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-19 12:21:05,636 - INFO - app - Received question: 'what is frc'
+2025-05-19 12:21:07,301 - INFO - app - Retrieved 5 source documents for question: 'what is frc'. Details: Source: Unknown, Page: N/A, Snippet: Tsering is president of India
+Saubhagya is Jai Jagannath
+Full form of FRC i...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...
+2025-05-19 12:21:07,306 - INFO - app - LLM Answer: 'FRC stands for Financial Reporting Centre and is located on the first floor....'
+2025-05-19 12:21:07,309 - INFO - _internal - 127.0.0.1 - - [19/May/2025 12:21:07] "POST /api/ask HTTP/1.1" 200 -
+2025-05-20 19:35:28,823 - INFO - app - Flask app starting: API key loaded.
+2025-05-20 19:35:28,825 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-20 19:35:28,896 - INFO - app - LLM initialized successfully.
+2025-05-20 19:35:28,904 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-20 19:35:28,963 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.221.127:5001
+2025-05-20 19:35:28,964 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-20 19:35:29,005 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-20 19:35:30,801 - INFO - app - Flask app starting: API key loaded.
+2025-05-20 19:35:30,802 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-20 19:35:30,819 - INFO - app - LLM initialized successfully.
+2025-05-20 19:35:30,820 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-20 19:35:30,831 - WARNING - _internal -  * Debugger is active!
+2025-05-20 19:35:30,839 - INFO - _internal -  * Debugger PIN: 941-557-013
+2025-05-20 19:35:58,616 - INFO - _internal - 127.0.0.1 - - [20/May/2025 19:35:58] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 19:35:58,625 - INFO - _internal - 127.0.0.1 - - [20/May/2025 19:35:58] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:33:07,396 - INFO - app - Flask app starting: API key loaded.
+2025-05-20 20:33:07,397 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-20 20:33:07,445 - INFO - app - LLM initialized successfully.
+2025-05-20 20:33:07,447 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-20 20:33:07,474 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.221.127:5001
+2025-05-20 20:33:07,474 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-20 20:33:07,488 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-20 20:33:09,266 - INFO - app - Flask app starting: API key loaded.
+2025-05-20 20:33:09,267 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-20 20:33:09,285 - INFO - app - LLM initialized successfully.
+2025-05-20 20:33:09,285 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-20 20:33:09,295 - WARNING - _internal -  * Debugger is active!
+2025-05-20 20:33:09,301 - INFO - _internal -  * Debugger PIN: 941-557-013
+2025-05-20 20:33:27,929 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:33:27] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:33:27,931 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:33:27] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:34:17,385 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:34:17] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:34:17,387 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:34:17] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:38:36,391 - INFO - app - Flask app starting: API key loaded.
+2025-05-20 20:38:36,392 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-20 20:38:36,410 - INFO - app - LLM initialized successfully.
+2025-05-20 20:38:36,410 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-20 20:38:36,431 - INFO - _internal - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.221.127:5001
+2025-05-20 20:38:36,432 - INFO - _internal - [33mPress CTRL+C to quit[0m
+2025-05-20 20:38:36,440 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-20 20:38:38,324 - INFO - app - Flask app starting: API key loaded.
+2025-05-20 20:38:38,325 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-20 20:38:38,343 - INFO - app - LLM initialized successfully.
+2025-05-20 20:38:38,343 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-20 20:38:38,352 - WARNING - _internal -  * Debugger is active!
+2025-05-20 20:38:38,356 - INFO - _internal -  * Debugger PIN: 941-557-013
+2025-05-20 20:39:00,735 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:39:00] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:39:00,741 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:39:00] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:41:14,931 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:41:14] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:41:14,932 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:41:14] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:48:16,639 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\gemini_handler.py', reloading
+2025-05-20 20:48:17,465 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-20 20:48:19,464 - INFO - app - Flask app starting: API key loaded.
+2025-05-20 20:48:19,479 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-20 20:48:19,499 - INFO - app - LLM initialized successfully.
+2025-05-20 20:48:19,499 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-20 20:48:19,514 - WARNING - _internal -  * Debugger is active!
+2025-05-20 20:48:19,519 - INFO - _internal -  * Debugger PIN: 941-557-013
+2025-05-20 20:53:00,267 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot\\config.py', reloading
+2025-05-20 20:53:00,954 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-20 20:53:02,854 - INFO - app - Flask app starting: API key loaded.
+2025-05-20 20:53:02,855 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-20 20:53:02,873 - INFO - app - LLM initialized successfully.
+2025-05-20 20:53:02,873 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-20 20:53:02,884 - WARNING - _internal -  * Debugger is active!
+2025-05-20 20:53:02,888 - INFO - _internal -  * Debugger PIN: 941-557-013
+2025-05-20 20:57:57,351 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:57:57] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:57:57,353 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:57:57] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 20:58:16,613 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-20 20:58:16,614 - INFO - app - Previous application state for SOPs cleared.
+2025-05-20 20:58:16,946 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-20 20:58:16,949 - INFO - app - Successfully created 5 text chunks.
+2025-05-20 20:58:19,106 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-20 20:58:19,353 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-20 20:58:19,384 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-20 20:58:19,392 - INFO - app - Vector store created successfully.
+2025-05-20 20:58:19,397 - INFO - app - LLM obtained successfully.
+2025-05-20 20:58:19,401 - INFO - app - Conversational QA chain created successfully.
+2025-05-20 20:58:19,401 - INFO - app - SOP processing complete. Docs: 2, Chunks: 5. QA chain is ready.
+2025-05-20 20:58:19,402 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:58:19] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-20 20:58:19,413 - INFO - _internal - 127.0.0.1 - - [20/May/2025 20:58:19] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 21:02:06,841 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:02:06] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 21:02:06,843 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:02:06] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 21:02:37,544 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:02:37] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 21:02:37,551 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:02:37] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 21:02:43,838 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-20 21:02:43,839 - INFO - app - Previous application state for SOPs cleared.
+2025-05-20 21:02:43,907 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-20 21:02:43,908 - INFO - app - Successfully created 5 text chunks.
+2025-05-20 21:02:45,939 - INFO - app - Vector store created successfully.
+2025-05-20 21:02:45,942 - INFO - app - LLM obtained successfully.
+2025-05-20 21:02:45,942 - INFO - app - Conversational QA chain created successfully.
+2025-05-20 21:02:45,943 - INFO - app - SOP processing complete. Docs: 2, Chunks: 5. QA chain is ready.
+2025-05-20 21:02:45,944 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:02:45] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-20 21:02:45,952 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:02:45] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 21:02:52,514 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:02:52] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-20 21:02:52,518 - INFO - app - Received question: 'what is grdc'
+2025-05-20 21:02:54,167 - INFO - _internal -  * Detected change in 'C:\\Users\\seema\\AppData\\Roaming\\Python\\Python313\\site-packages\\langchain_google_genai\\chat_models.py', reloading
+2025-05-20 21:02:57,171 - INFO - _internal -  * Restarting with watchdog (windowsapi)
+2025-05-20 21:02:59,104 - INFO - app - Flask app starting: API key loaded.
+2025-05-20 21:02:59,104 - INFO - app - Application initialized: API key loaded successfully.
+2025-05-20 21:02:59,121 - INFO - app - LLM initialized successfully.
+2025-05-20 21:02:59,121 - INFO - app - Starting Flask app on host 0.0.0.0, port 5001
+2025-05-20 21:02:59,131 - WARNING - _internal -  * Debugger is active!
+2025-05-20 21:02:59,135 - INFO - _internal -  * Debugger PIN: 941-557-013
+2025-05-20 21:04:31,627 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:04:31] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 21:04:31,628 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:04:31] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 21:04:34,585 - INFO - app - '/api/process_sops' endpoint called. Attempting to refresh knowledge base.
+2025-05-20 21:04:34,586 - INFO - app - Previous application state for SOPs cleared.
+2025-05-20 21:04:34,756 - INFO - app - Successfully loaded 2 documents from 'C:\Users\seema\Desktop\AI\windsurf\chatbot\sops'.
+2025-05-20 21:04:34,757 - INFO - app - Successfully created 5 text chunks.
+2025-05-20 21:04:35,945 - INFO - loader - Loading faiss with AVX2 support.
+2025-05-20 21:04:35,998 - INFO - loader - Successfully loaded faiss with AVX2 support.
+2025-05-20 21:04:36,011 - INFO - __init__ - Failed to load GPU Faiss: name 'GpuIndexIVFFlat' is not defined. Will not load constructor refs for GPU indexes. This is only an error if you're trying to use GPU Faiss.
+2025-05-20 21:04:36,024 - INFO - app - Vector store created successfully.
+2025-05-20 21:04:36,032 - INFO - app - LLM obtained successfully.
+2025-05-20 21:04:36,035 - INFO - app - Conversational QA chain created successfully.
+2025-05-20 21:04:36,036 - INFO - app - SOP processing complete. Docs: 2, Chunks: 5. QA chain is ready.
+2025-05-20 21:04:36,038 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:04:36] "POST /api/process_sops HTTP/1.1" 200 -
+2025-05-20 21:04:36,052 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:04:36] "GET /api/status HTTP/1.1" 200 -
+2025-05-20 21:04:38,316 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:04:38] "OPTIONS /api/ask HTTP/1.1" 200 -
+2025-05-20 21:04:38,321 - INFO - app - Received question: 'hi'
+2025-05-20 21:04:41,292 - INFO - app - Retrieved 5 source documents for question: 'hi'. Details: Source: Unknown, Page: N/A, Snippet: Tsering is president of India
+Saubhagya is Jai Jagannath
+Full form of FRC i...; Source: Unknown, Page: N/A, Snippet: CHATBOT POC -GRDC Assistant  
+ 
+1. Executive Summary  
+Objective  
+To devel...; Source: Unknown, Page: N/A, Snippet: d) Content stored in DB.  
+e) Fallback Handling.  
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+...; Source: Unknown, Page: N/A, Snippet: Step 8 : Then Open Default Edge or Google or Safari – from where GR URL ope...; Source: Unknown, Page: N/A, Snippet: and logged into the account. However, after logging in, the only page displ...
+2025-05-20 21:04:41,299 - INFO - app - LLM Answer: 'The provided text does not contain a response to "hi".  The document describes a chatbot for GRDC-re...'
+2025-05-20 21:04:41,302 - INFO - _internal - 127.0.0.1 - - [20/May/2025 21:04:41] "POST /api/ask HTTP/1.1" 200 -

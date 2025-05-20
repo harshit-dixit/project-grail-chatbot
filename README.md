@@ -1,4 +1,131 @@
-# SOP Chatbot with Python, RAG, and Gemini API
+# Project GRAIL Chatbot
+
+A chatbot that answers questions based on Standard Operating Procedures (SOPs) using Retrieval Augmented Generation (RAG) and the Google Gemini API.
+
+---
+
+## Features
+
+- Load SOP documents (`.txt`, `.pdf`, `.docx`)
+- Chunk documents for efficient retrieval
+- Generate embeddings and store them in a FAISS vector database
+- Retrieve relevant document chunks based on user queries
+- Use Google Gemini API for context-aware answers
+- Modern React frontend and Flask backend
+
+---
+
+## Project Structure
+
+```
+chatbot/
+├── sops/                  # SOP documents directory
+├── app.py                 # Flask backend
+├── frontend/              # React frontend
+├── utils.py               # Document loading and processing
+├── vector_store_manager.py # Vector store management
+├── gemini_handler.py      # Gemini API integration
+├── requirements.txt       # Python dependencies
+├── .env                   # API keys (not committed)
+└── README.md              # This file
+```
+
+---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+
+```bash
+git clone <your-repo-url>
+cd chatbot
+```
+
+### 2. Backend Setup (Python/Flask)
+
+**a. Create and activate a virtual environment:**
+```bash
+python -m venv venv
+venv\Scripts\activate  # On Windows
+# source venv/bin/activate  # On macOS/Linux
+```
+
+**b. Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+**c. Set up your Gemini API Key:**
+- Obtain an API key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+- Create a `.env` file in the root directory:
+  ```
+  GOOGLE_API_KEY="YOUR_GEMINI_API_KEY"
+  ```
+
+**d. Add SOP Documents:**
+- Place your `.txt`, `.pdf`, or `.docx` files in the `sops/` directory.
+
+---
+
+### 3. Frontend Setup (React)
+
+```bash
+cd frontend
+npm install
+```
+
+---
+
+### 4. Running the Application
+
+**Open two terminals:**
+
+**Terminal 1: Start Backend**
+```bash
+cd chatbot
+venv\Scripts\activate  # (if not already activated)
+python app.py
+```
+
+**Terminal 2: Start Frontend**
+```bash
+cd chatbot/frontend
+npm start
+```
+
+- The backend runs on [http://localhost:5001](http://localhost:5001)
+- The frontend runs on [http://localhost:3000](http://localhost:3000)
+
+---
+
+## Deployment/Transfer to Another Machine
+
+1. Copy the `chatbot` folder (excluding `venv` and `frontend/node_modules`) to your new machine.
+2. Repeat the setup steps above.
+3. Recreate `.env` with your API key on the new machine.
+
+---
+
+## Troubleshooting
+
+- **API Key Errors:** Ensure your `.env` file exists and contains a valid `GOOGLE_API_KEY`.
+- **Document Loading:** Confirm your SOP files are in the `sops/` directory.
+- **Dependency Issues:** Reinstall dependencies (`pip install -r requirements.txt`, `npm install`).
+
+---
+
+## Contributing
+
+Pull requests and suggestions are welcome! Please open an issue first to discuss changes.
+
+---
+
+## License
+
+[MIT License](LICENSE) (if applicable)
+
+---
+
 
 This project implements a chatbot that answers questions based on a provided set of Standard Operating Procedures (SOPs). It uses Retrieval Augmented Generation (RAG) with the Google Gemini API.
 
