@@ -27,6 +27,7 @@ import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
 import FindInPageIcon from '@mui/icons-material/FindInPage';
 import tataSteelLogo from './logo/tata-steel-logo_light.png'; 
 import tataLogoRight from './logo/tata_logo_light.png';
+import AdminPage from './AdminPage';
 
 const initialMessages = [
   { sender: 'bot', text: 'Hello! How can I help you today?', id: "initialWelcome" }
@@ -225,68 +226,19 @@ function App() {
         </Box>
       </Box>
 
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-        <Paper elevation={3} sx={{ p: 2, display: 'inline-block', minWidth: '300px', borderRadius: '12px' }}>
-          {isLoadingStatus ? (
-            <Stack alignItems="center" spacing={1}>
-              <CircularProgress size={24} />
-              <Typography variant="body2">Loading Status...</Typography>
-            </Stack>
-          ) : (
-            <Stack spacing={1.5}>
-              <Grid container justifyContent="space-between" alignItems="center">
-                <Typography variant="body2" component="span" fontWeight="medium">Backend:</Typography>
-                <Chip label={backendStatus} color={getStatusChipColor(backendStatus)} size="small" sx={{ flexGrow: 1, mx:1, justifyContent:'flex-start', '& .MuiChip-label': {overflow: 'visible'} }}/>
-              </Grid>
-              <Grid container justifyContent="space-between" alignItems="center">
-                <Typography variant="body2" component="span" fontWeight="medium">API Key:</Typography>
-                <Chip label={apiKeyLoaded ? 'Loaded' : 'Not Loaded'} color={getBooleanChipColor(apiKeyLoaded)} size="small" />
-              </Grid>
-              <Grid container justifyContent="space-between" alignItems="center">
-                <Typography variant="body2" component="span" fontWeight="medium">SOPs:</Typography>
-                <Chip label={sopsProcessed ? 'Processed' : 'Not Processed'} color={sopsProcessed ? 'success' : 'warning'} size="small" />
-              </Grid>
-              <Button 
-                variant="outlined" 
-                size="small" 
-                startIcon={<AutorenewIcon />} 
-                onClick={handleProcessSops} 
-                disabled={isProcessingSops || !apiKeyLoaded}
-                sx={{
-                  mt: 1, 
-                  width: '100%',
-                  transition: 'transform 0.2s ease-in-out, filter 0.2s ease-in-out',
-                  '&:hover': {
-                    filter: 'brightness(1.15)',
-                    transform: 'scale(1.03)'
-                  }
-                }} 
-              >
-                {isProcessingSops ? 'Processing...' : 'Process SOPs'}
-              </Button>
-              <Button 
-                variant="outlined" 
-                size="small" 
-                color="warning" 
-                startIcon={<DeleteSweepIcon />} 
-                onClick={handleClearChat} 
-                disabled={messages.length <= 1 && messages[0]?.text === initialMessages[0]?.text} 
-                sx={{
-                  mt: 1, 
-                  width: '100%',
-                  transition: 'transform 0.2s ease-in-out, filter 0.2s ease-in-out',
-                  '&:hover': {
-                    filter: 'brightness(1.15)',
-                    transform: 'scale(1.03)'
-                  }
-                }}
-              >
-                Clear Chat
-              </Button>
-            </Stack>
-          )}
-        </Paper>
-      </Box>
+      <AdminPage
+        isLoadingStatus={isLoadingStatus}
+        backendStatus={backendStatus}
+        apiKeyLoaded={apiKeyLoaded}
+        sopsProcessed={sopsProcessed}
+        isProcessingSops={isProcessingSops}
+        handleProcessSops={handleProcessSops}
+        handleClearChat={handleClearChat}
+        messages={messages}
+        initialMessages={initialMessages}
+        getStatusChipColor={getStatusChipColor}
+        getBooleanChipColor={getBooleanChipColor}
+      />
 
       <Paper elevation={6} sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', backgroundColor: theme.palette.background.paper, mt: 0, borderRadius: '12px' }}>
         <Box sx={{ flexGrow: 1, p: 2, overflowY: 'auto' }}>
