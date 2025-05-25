@@ -11,6 +11,10 @@
 # production
 /build
 
+sops/
+gemini_api_key.env
+
+
 # misc
 .DS_Store
 .env.local
