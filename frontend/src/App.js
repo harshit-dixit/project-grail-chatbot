@@ -1,85 +1,259 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
-  Container,
-  Box,
-  Typography,
-  TextField,
-  Button,
-  Paper,
-  Grid,
-  Chip,
-  CircularProgress,
-  Stack,
-  useTheme,
-  Snackbar,
-  Alert,
-  Fab,
-  Grow, 
-  IconButton,
-  // Accordion, 
-  // AccordionSummary, 
-  // AccordionDetails
+  Container, Paper, TextField, Button, Typography, Box, AppBar, Toolbar, IconButton, 
+  Grow, Avatar, useTheme, Snackbar, Alert as MuiAlert, Tooltip, CircularProgress
 } from '@mui/material';
 import SendIcon from '@mui/icons-material/Send';
-import AutorenewIcon from '@mui/icons-material/Autorenew';
-import DeleteSweepIcon from '@mui/icons-material/DeleteSweep'; 
-// import ExpandMoreIcon from '@mui/icons-material/ExpandMore'; 
-import FindInPageIcon from '@mui/icons-material/FindInPage';
-import tataSteelLogo from './logo/tata-steel-logo_light.png'; 
-import tataLogoRight from './logo/tata_logo_light.png';
+import SettingsIcon from '@mui/icons-material/Settings';
+import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
+import { Routes, Route, Link as RouterLink, useLocation } from 'react-router-dom';
+import AdminPage from './AdminPage';
+import tataSteelBlueLogo from './logo/tata_steel_blue_svg.svg'; 
+import tataBlueLogo from './logo/tata_svg.svg';
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const initialMessages = [
-  { sender: 'bot', text: 'Hello! How can I help you today?', id: "initialWelcome" }
+  { sender: 'bot', text: 'Hello! How can I help you today?', id: "initialWelcome-1" }
 ];
 
-function App() {
+const AppHeader = ({ theme }) => {
+  if (typeof tataSteelBlueLogo === 'undefined') {
+    console.warn('tataSteelBlueLogo is undefined at AppHeader render time.');
+  } else {
+    console.log('tataSteelBlueLogo in AppHeader:', tataSteelBlueLogo);
+  }
+
+  return (
+    <AppBar position="static" sx={{ backgroundColor: theme.palette.background.paper, color: theme.palette.text.primary, boxShadow: theme.shadows[2] }}>
+      <Container maxWidth="xl"> 
+        <Toolbar disableGutters sx={{ minHeight: '64px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', px: { xs: 2, sm: 3 } }}>
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            minWidth: '120px',
+            justifyContent: 'flex-start'
+          }}> 
+            {tataSteelBlueLogo ? (
+              <img 
+                src={tataSteelBlueLogo} 
+                alt="Tata Steel Blue Logo" 
+                style={{ 
+                  height: '24.5px', /* 70% of 35px */
+                  width: 'auto', 
+                  display: 'block',
+                  objectFit: 'contain',
+                  alignSelf: 'center' /* Ensure vertical centering */
+                }} 
+              />
+            ) : (
+              <Typography variant="caption" color="error">Left Logo Missing</Typography>
+            )}
+          </Box>
+          <Box sx={{ 
+            flexGrow: 1, 
+            display: 'flex', 
+            justifyContent: 'center', 
+            alignItems: 'center', 
+            textAlign: 'center', 
+            px: 2 
+          }}>
+            <Typography variant="h5" component="h1" sx={{ 
+              fontWeight: 'bold', 
+              color: theme.palette.text.primary,
+              whiteSpace: 'nowrap'
+            }}>
+              Project GRAIL Chatbot
+            </Typography>
+          </Box>
+          <Box sx={{ 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'flex-end', 
+            minWidth: '120px'
+          }}> 
+            {tataBlueLogo && (
+              <img 
+                src={tataBlueLogo} 
+                alt="Tata Blue Logo" 
+                style={{ 
+                  height: '35px', 
+                  width: 'auto', 
+                  display: 'block',
+                  objectFit: 'contain'
+                }} 
+              />
+            )}
+            <Tooltip title="Admin Settings">
+              <IconButton component={RouterLink} to="/admin" sx={{ color: theme.palette.action.active }}>
+                <SettingsIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        </Toolbar>
+      </Container>
+    </AppBar>
+  );
+};
+
+const ChatInterface = ({
+  userInput, setUserInput, messages, isAsking, 
+  handleAskQuestion, handleClearChat, messagesEndRef, 
+  apiKeyLoaded, sopsProcessed
+}) => {
   const theme = useTheme();
-  const [backendStatus, setBackendStatus] = useState('Checking backend status...');
-  const [apiKeyLoaded, setApiKeyLoaded] = useState(false);
-  const [sopsProcessed, setSopsProcessed] = useState(false);
-  const [isLoadingStatus, setIsLoadingStatus] = useState(true);
+  const chatboxBorderRadius = 4; 
+
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      if (userInput.trim()) {
+        handleAskQuestion();
+      }
+    }
+  };
+
+  let inputPlaceholder = "Ask anything...";
+  if (!apiKeyLoaded) {
+    inputPlaceholder = "API Key not loaded. Please check Admin Page.";
+  } else if (!sopsProcessed) {
+    inputPlaceholder = "SOPs data not processed. Please process on Admin Page.";
+  }
+
+  const buttonSx = {
+    height: '56px', 
+    minWidth: '56px',
+    borderRadius: chatboxBorderRadius, 
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '0 16px', 
+  };
+
+  return (
+    <Container maxWidth="lg" sx={{ height: 'calc(100vh - 64px - 16px)', display: 'flex', flexDirection: 'column', pt: 2, pb:0 }}> 
+      <Paper elevation={3} sx={{
+          flexGrow: 1, 
+          display: 'flex', 
+          flexDirection: 'column', 
+          overflow: 'hidden', 
+          backgroundColor: theme.palette.background.paper,
+          borderRadius: chatboxBorderRadius, 
+          minHeight: 0 
+        }}>
+        <Box sx={{ flexGrow: 1, p: 2, overflowY: 'auto' }}>
+          {messages.map((msg) => (
+            <Grow in={true} key={msg.id}>
+              <Box sx={{
+                mb: 1.5,
+                display: 'flex',
+                flexDirection: msg.sender === 'user' ? 'row-reverse' : 'row',
+                alignItems: 'flex-start',
+              }}>
+                <Paper 
+                  elevation={1} 
+                  sx={{
+                    p: 1.5,
+                    borderRadius: chatboxBorderRadius, 
+                    backgroundColor: msg.sender === 'user' 
+                                     ? theme.palette.primary.main 
+                                     : (theme.palette.mode === 'light' ? theme.palette.grey[200] : theme.palette.grey[700]), 
+                    color: msg.sender === 'user' 
+                           ? theme.palette.primary.contrastText 
+                           : theme.palette.text.primary,
+                    maxWidth: '75%',
+                    wordWrap: 'break-word',
+                  }}
+                >
+                  <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>{msg.text}</Typography>
+                </Paper>
+              </Box>
+            </Grow>
+          ))}
+          <div ref={messagesEndRef} />
+        </Box>
+
+        <Box sx={{ p: 2, borderTop: `1px solid ${theme.palette.divider}` }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+            <TextField
+              fullWidth
+              variant="outlined"
+              placeholder={inputPlaceholder}
+              value={userInput}
+              onChange={(e) => setUserInput(e.target.value)}
+              onKeyPress={handleKeyPress}
+              multiline
+              maxRows={4}
+              disabled={isAsking || !apiKeyLoaded || !sopsProcessed}
+              sx={{
+                flexGrow: 1,
+                '& .MuiOutlinedInput-root': {
+                  borderRadius: chatboxBorderRadius, 
+                  backgroundColor: theme.palette.background.default, 
+                  '& input::placeholder': { 
+                    color: theme.palette.text.secondary,
+                    opacity: 1, 
+                  },
+                  '& textarea::placeholder': { 
+                    color: theme.palette.text.secondary,
+                    opacity: 1,
+                  },
+                }
+              }}
+            />
+            <Button 
+              variant="contained" 
+              color="primary" 
+              onClick={handleAskQuestion} 
+              disabled={isAsking || !userInput.trim() || !apiKeyLoaded || !sopsProcessed}
+              sx={{
+                ...buttonSx,
+                backgroundColor: theme.palette.primary.main,
+                '&:hover': {
+                  backgroundColor: theme.palette.primary.dark,
+                }
+              }}
+            >
+              {isAsking ? <CircularProgress size={24} sx={{ color: theme.palette.primary.contrastText }} /> : <SendIcon sx={{ color: theme.palette.primary.contrastText }}/>}
+            </Button>
+            <Tooltip title="Clear Chat">
+              <IconButton 
+                onClick={handleClearChat} 
+                sx={{
+                  ...buttonSx,
+                  color: theme.palette.error.main,
+                  border: `1px solid ${theme.palette.error.light}`,
+                  '&:hover': {
+                    backgroundColor: theme.palette.action.hover, 
+                    borderColor: theme.palette.error.main,
+                  }
+                }}
+              >
+                <DeleteSweepIcon />
+              </IconButton>
+            </Tooltip>
+          </Box>
+        </Box>
+      </Paper>
+    </Container>
+  );
+};
+
+function App() {
+  const theme = useTheme(); 
+  const location = useLocation(); 
 
   const [userInput, setUserInput] = useState('');
   const [messages, setMessages] = useState([...initialMessages]); 
-  const [isProcessingSops, setIsProcessingSops] = useState(false);
   const [isAsking, setIsAsking] = useState(false);
-
+  const messagesEndRef = useRef(null);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState('info');
-
-  const messagesEndRef = useRef(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
-  const fetchBackendStatus = async () => {
-    setIsLoadingStatus(true);
-    try {
-      const response = await fetch('http://localhost:5001/api/status');
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-      const data = await response.json();
-      setApiKeyLoaded(data.api_key_loaded);
-      setSopsProcessed(data.sops_processed);
-      if (data.error_message) setBackendStatus(`Backend Error: ${data.error_message}`);
-      else if (!data.api_key_loaded) setBackendStatus('API Key not loaded. Check gemini_api_key.env.');
-      else setBackendStatus('Backend connected.');
-    } catch (error) {
-      console.error("Failed to fetch backend status:", error);
-      setBackendStatus('Failed to connect to backend. Is it running?');
-      showSnackbar('Failed to fetch backend status.', 'error');
-    }
-    setIsLoadingStatus(false);
-  };
-
-  useEffect(() => {
-    fetchBackendStatus();
-  }, []);
+  const [snackbarSeverity, setSnackbarSeverity] = useState('info'); 
+  const [apiKeyLoaded, setApiKeyLoaded] = useState(false);
+  const [sopsProcessed, setSopsProcessed] = useState(false);
 
   const showSnackbar = (message, severity = 'info') => {
     setSnackbarMessage(message);
@@ -88,294 +262,114 @@ function App() {
   };
 
   const handleCloseSnackbar = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
+    if (reason === 'clickaway') return;
     setSnackbarOpen(false);
   };
 
-  const handleClearChat = () => {
-    setMessages([...initialMessages]);
-    showSnackbar('Chat cleared.', 'info');
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const handleProcessSops = async () => {
-    setIsProcessingSops(true);
-    showSnackbar('Processing SOP documents... This may take a moment.', 'info');
+  useEffect(scrollToBottom, [messages]);
+
+  const fetchAppStatus = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/process_sops', { method: 'POST' });
+      const response = await fetch('http://localhost:5001/api/status');
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
-      if (!response.ok) throw new Error(data.error || `HTTP error! status: ${response.status}`);
-      
-      setSopsProcessed(true); 
-      showSnackbar(`SOPs processed successfully. ${data.message || ''}. Found ${data.documents_processed_count} docs, ${data.text_chunks_count} chunks.`, 'success');
-      fetchBackendStatus(); 
+      setApiKeyLoaded(data.api_key_loaded);
+      setSopsProcessed(data.sops_processed);
     } catch (error) {
-      console.error("Failed to process SOPs:", error);
-      showSnackbar(`Error processing SOPs: ${error.message}`, 'error');
-      setSopsProcessed(false); 
+      console.error("Failed to fetch app status:", error);
+      setApiKeyLoaded(false);
+      setSopsProcessed(false);
+      if (location.pathname !== '/admin') {
+         showSnackbar('Failed to fetch initial app status. Backend may be down.', 'error');
+      }
     }
-    setIsProcessingSops(false);
-  };
+  }, [location.pathname]); 
+
+  useEffect(() => {
+    fetchAppStatus();
+  }, [fetchAppStatus]);
 
   const handleAskQuestion = async () => {
     if (!userInput.trim()) return;
+    const currentQuestion = userInput;
+    const userMessage = { text: currentQuestion, sender: "user", id: `user-${Date.now()}` };
 
-    const newMessages = [...messages, { sender: 'user', text: userInput.trim(), id: `user-${Date.now()}` }];
-    setMessages(newMessages);
-    const currentQuestion = userInput.trim();
+    setMessages(prev => [...prev, userMessage]);
     setUserInput('');
     setIsAsking(true);
 
     try {
       const response = await fetch('http://localhost:5001/api/ask', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: currentQuestion }),
       });
 
-      const data = await response.json();
+      const responseText = await response.text();
       if (response.ok) {
-        const botResponseId = `bot-${Date.now()}`;
-        const botMessage = { text: data.answer, sender: "bot", id: botResponseId };
-        setMessages(prevMessages => [...prevMessages, botMessage]);
-        showSnackbar('Answer found.', 'success');
+        const data = JSON.parse(responseText);
+        setMessages(prev => [...prev, { text: data.answer, sender: "bot", id: `bot-${Date.now()}` }]);
       } else {
-        const errorData = await response.json().catch(() => ({ error: 'Failed to parse error response.' }));
-        const botErrorId = `bot-error-${Date.now()}`;
-        const botMessage = { text: errorData.error || `HTTP error! status: ${response.status}`, sender: "bot", id: botErrorId };
-        setMessages(prevMessages => [...prevMessages, botMessage]);
-        showSnackbar(errorData.error || `HTTP error! status: ${response.status}`, 'error');
+        console.error('Error response status:', response.status, 'Raw text:', responseText);
+        let displayMessage = `Error: ${response.status}`;
+        try {
+          const errorData = JSON.parse(responseText);
+          displayMessage = errorData.error || errorData.message || displayMessage;
+        } catch (parseError) { /* Use raw text or status if JSON parsing fails */ }
+        setMessages(prev => [...prev, { text: displayMessage, sender: "bot", id: `bot-error-${Date.now()}` }]);
+        showSnackbar(displayMessage, 'error');
       }
     } catch (error) {
       console.error('Network or other error asking question:', error);
-      const errorId = `bot-network-error-${Date.now()}`;
-      setMessages(prevMessages => [
-        ...prevMessages,
-        { sender: 'bot', text: 'Network error. Could not reach the chatbot service.', id: errorId }
-      ]);
-      showSnackbar('Network error. Please check backend connection.', 'error');
-    } finally {
-      setIsAsking(false);
-      setUserInput(''); 
+      const errorMessage = 'Network error. Could not reach the chatbot service.';
+      setMessages(prev => [...prev, { text: errorMessage, sender: "bot", id: `bot-network-error-${Date.now()}` }]);
+      showSnackbar(errorMessage, 'error');
     }
+    setIsAsking(false);
   };
 
-  const getStatusChipColor = (status) => {
-    if (status.includes('Error') || status.includes('Failed') || status.includes('not loaded')) return 'error';
-    if (status.includes('connected')) return 'success';
-    return 'default';
+  const handleClearChat = () => {
+    setMessages([...initialMessages]); 
+    showSnackbar('Chat cleared.', 'info');
   };
-  const getBooleanChipColor = (value) => (value ? 'success' : 'error');
+
+  if (location.pathname.startsWith("/admin")) {
+    return <AdminPage />;
+  }
 
   return (
-    <Container maxWidth="lg" sx={{
-      display: 'flex', 
-      flexDirection: 'column', 
-      minHeight: '100vh', 
-      py: 2,
-      backgroundColor: theme.palette.background.default 
-    }}>
-      <Box 
-        component="header" 
-        sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'space-between', 
-          py: 2, 
-          mb: 2,
-          borderBottom: `1px solid ${theme.palette.divider}`
-        }}
-      >
-        <Box sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'flex-start', 
-          width: '200px', 
-          flexShrink: 0 
-        }}>
-          <img 
-            src={tataSteelLogo} 
-            alt="Tata Steel Logo" 
-            style={{ maxHeight: '50px', width: 'auto', display: 'block' }} 
-          />
-        </Box>
-        <Box sx={{ flexGrow: 1, textAlign: 'center', px: 2 }}>
-          <Typography variant="h4" component="h1" fontWeight="bold" color="primary">
-            Project GRAIL
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary">
-            AI assistant for Tata Steel Group Reporting
-          </Typography>
-        </Box>
-        <Box sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'flex-end', 
-          width: '200px', 
-          flexShrink: 0 
-        }}>
-          <img 
-            src={tataLogoRight} 
-            alt="Tata Logo" 
-            style={{ maxHeight: '50px', width: 'auto', display: 'block' }} 
-          />
-        </Box>
-      </Box>
-
-      <Box sx={{ display: 'flex', justifyContent: 'center', mb: 2 }}>
-        <Paper elevation={3} sx={{ p: 2, display: 'inline-block', minWidth: '300px', borderRadius: '12px' }}>
-          {isLoadingStatus ? (
-            <Stack alignItems="center" spacing={1}>
-              <CircularProgress size={24} />
-              <Typography variant="body2">Loading Status...</Typography>
-            </Stack>
-          ) : (
-            <Stack spacing={1.5}>
-              <Grid container justifyContent="space-between" alignItems="center">
-                <Typography variant="body2" component="span" fontWeight="medium">Backend:</Typography>
-                <Chip label={backendStatus} color={getStatusChipColor(backendStatus)} size="small" sx={{ flexGrow: 1, mx:1, justifyContent:'flex-start', '& .MuiChip-label': {overflow: 'visible'} }}/>
-              </Grid>
-              <Grid container justifyContent="space-between" alignItems="center">
-                <Typography variant="body2" component="span" fontWeight="medium">API Key:</Typography>
-                <Chip label={apiKeyLoaded ? 'Loaded' : 'Not Loaded'} color={getBooleanChipColor(apiKeyLoaded)} size="small" />
-              </Grid>
-              <Grid container justifyContent="space-between" alignItems="center">
-                <Typography variant="body2" component="span" fontWeight="medium">SOPs:</Typography>
-                <Chip label={sopsProcessed ? 'Processed' : 'Not Processed'} color={sopsProcessed ? 'success' : 'warning'} size="small" />
-              </Grid>
-              <Button 
-                variant="outlined" 
-                size="small" 
-                startIcon={<AutorenewIcon />} 
-                onClick={handleProcessSops} 
-                disabled={isProcessingSops || !apiKeyLoaded}
-                sx={{
-                  mt: 1, 
-                  width: '100%',
-                  transition: 'transform 0.2s ease-in-out, filter 0.2s ease-in-out',
-                  '&:hover': {
-                    filter: 'brightness(1.15)',
-                    transform: 'scale(1.03)'
-                  }
-                }} 
-              >
-                {isProcessingSops ? 'Processing...' : 'Process SOPs'}
-              </Button>
-              <Button 
-                variant="outlined" 
-                size="small" 
-                color="warning" 
-                startIcon={<DeleteSweepIcon />} 
-                onClick={handleClearChat} 
-                disabled={messages.length <= 1 && messages[0]?.text === initialMessages[0]?.text} 
-                sx={{
-                  mt: 1, 
-                  width: '100%',
-                  transition: 'transform 0.2s ease-in-out, filter 0.2s ease-in-out',
-                  '&:hover': {
-                    filter: 'brightness(1.15)',
-                    transform: 'scale(1.03)'
-                  }
-                }}
-              >
-                Clear Chat
-              </Button>
-            </Stack>
-          )}
-        </Paper>
-      </Box>
-
-      <Paper elevation={6} sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', backgroundColor: theme.palette.background.paper, mt: 0, borderRadius: '12px' }}>
-        <Box sx={{ flexGrow: 1, p: 2, overflowY: 'auto' }}>
-          {messages.map((msg, index) => (
-            <Grow in={true} key={msg.id}> 
-              <Box key={index} sx={{ mb: 2, display: 'flex', justifyContent: msg.sender === 'user' ? 'flex-end' : 'flex-start' }}>
-                <Paper 
-                  elevation={1} 
-                  sx={{
-                    padding: '10px 15px',
-                    borderRadius: '20px',
-                    borderTopLeftRadius: msg.sender === 'bot' ? '5px' : '20px', 
-                    borderTopRightRadius: msg.sender === 'user' ? '5px' : '20px', 
-                    bgcolor: msg.sender === 'user' ? '#27AE60' : (theme.palette.mode === 'dark' ? theme.palette.grey[700] : theme.palette.grey[200]),
-                    color: msg.sender === 'user' ? 'white' : theme.palette.text.primary,
-                    maxWidth: '70%',
-                    wordWrap: 'break-word',
-                  }}
-                >
-                  <Typography variant="body1">{msg.text}</Typography>
-                </Paper>
-              </Box>
-            </Grow>
-          ))}
-          {isAsking && (
-            <Box sx={{ display: 'flex', justifyContent: 'flex-start', mb: 1 }}>
-              <Paper 
-                elevation={1} 
-                sx={{
-                  padding: '10px 15px',
-                  borderRadius: '20px',
-                  borderTopLeftRadius: '5px',
-                  bgcolor: theme.palette.mode === 'dark' ? theme.palette.grey[700] : theme.palette.grey[200],
-                  color: theme.palette.text.primary,
-                  maxWidth: '70%',
-                  fontStyle: 'italic'
-                }}
-              >
-                <Typography variant="body1">Thinking...</Typography>
-              </Paper>
-            </Box>
-          )}
-          <div ref={messagesEndRef} />
-        </Box>
-
-        <Box sx={{ p: 2, borderTop: `1px solid ${theme.palette.divider}`, backgroundColor: theme.palette.background.default }}>
-          <Stack direction="row" spacing={1}>
-            <TextField 
-              fullWidth 
-              variant="outlined" 
-              placeholder={!apiKeyLoaded ? "API Key not loaded" : !sopsProcessed ? "Data not processed" : "Ask anything..."} 
-              size="small"
-              value={userInput}
-              onChange={(e) => setUserInput(e.target.value)}
-              disabled={isAsking || !apiKeyLoaded || !sopsProcessed || isProcessingSops}
-              onKeyPress={(e) => e.key === 'Enter' && !isAsking && handleAskQuestion()}
-              sx={{ '& .MuiOutlinedInput-root': { borderRadius: '20px', backgroundColor: theme.palette.background.paper } }} 
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', backgroundColor: theme.palette.background.default }}>
+      <AppHeader theme={theme} />
+      <Routes>
+        <Route 
+          path="/"
+          element={(
+            <ChatInterface 
+              userInput={userInput}
+              setUserInput={setUserInput}
+              messages={messages}
+              isAsking={isAsking}
+              handleAskQuestion={handleAskQuestion}
+              handleClearChat={handleClearChat}
+              messagesEndRef={messagesEndRef}
+              apiKeyLoaded={apiKeyLoaded}
+              sopsProcessed={sopsProcessed}
             />
-            <IconButton 
-              type="submit" 
-              color="primary" 
-              disabled={isAsking || isProcessingSops || !sopsProcessed || userInput.trim() === ''}
-              sx={{
-                ml: 1,
-                transition: 'transform 0.2s ease-in-out, filter 0.2s ease-in-out',
-                '&:hover': {
-                  filter: 'brightness(1.2)',
-                  transform: 'scale(1.1)'
-                }
-              }}
-            >
-              <SendIcon />
-            </IconButton>
-          </Stack>
-        </Box>
-      </Paper>
-
-      <Box component="footer" sx={{ textAlign: 'center', py: 2, mt: 'auto' }}>
-        <Typography variant="caption" color="text.secondary">
-          Designed by Tata Steel IT Services Group Reporting
-        </Typography>
-      </Box>
-
+          )}
+        />
+        <Route path="/admin" element={<AdminPage showSnackbar={showSnackbar} refreshMainAppStatus={fetchAppStatus} />} />
+      </Routes>
+      
       <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
-        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }} variant="filled">
+        <Alert onClose={handleCloseSnackbar} severity={snackbarSeverity} sx={{ width: '100%' }}>
           {snackbarMessage}
         </Alert>
       </Snackbar>
-    </Container>
+    </Box>
   );
 }
 

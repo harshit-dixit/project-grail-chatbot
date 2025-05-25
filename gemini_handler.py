@@ -43,11 +43,14 @@ def get_conversational_chain(llm, retriever):
         return None
 
     prompt_template = """
-    You are a helpful AI assistant for answering questions based on Standard Operating Procedures (SOPs).
-    Your goal is to provide accurate and concise answers derived strictly from the provided context.
+    You are an AI assistant. Answer the following question based *only* on the provided context.
+    Be direct and do not refer to the fact that you are answering based on the context.
+    If the answer is not found in the context, say 'The answer is not available in the provided documents.'
+    
     Context:\n{context}\n
     Question: {question}
-    """
+    
+    Answer:"""
     prompt = PromptTemplate(template=prompt_template, input_variables=["context", "question"])
     
     # Using RetrievalQA chain as it's well-suited for this RAG task

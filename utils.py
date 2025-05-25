@@ -3,21 +3,24 @@ from PyPDF2 import PdfReader
 import docx2txt
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 import config
+import logging
+
+logger = logging.getLogger(__name__)
 
 def load_documents_from_sops_dir():
     """Loads all documents from the SOP_DIR and returns a list of their texts."""
     documents_text = []
     sops_directory = config.SOP_DIR_PATH 
-    print(f"Looking for documents in: {os.path.abspath(sops_directory)}")
+    logger.info(f"Looking for documents in: {os.path.abspath(sops_directory)}")
     if not os.path.isdir(sops_directory):
-        print(f"Error: Directory '{sops_directory}' not found. Please create it and add your SOP documents.")
+        logger.error(f"Directory '{sops_directory}' not found. Please create it and add your SOP documents.")
         return []
 
     for filename in os.listdir(sops_directory):
         file_path = os.path.join(sops_directory, filename)
         try:
             if filename.endswith(".pdf"):
-                print(f"Loading PDF: {filename}")
+                logger.info(f"Loading PDF: {filename}")
                 reader = PdfReader(file_path)
                 text = ""
                 for page in reader.pages:
@@ -27,29 +30,29 @@ def load_documents_from_sops_dir():
                 if text:
                     documents_text.append({'name': filename, 'text': text})
                 else:
-                    print(f"Warning: Could not extract text from PDF: {filename}")
+                    logger.warning(f"Could not extract text from PDF: {filename}")
             elif filename.endswith(".docx"):
-                print(f"Loading DOCX: {filename}")
+                logger.info(f"Loading DOCX: {filename}")
                 text = docx2txt.process(file_path)
                 if text:
                     documents_text.append({'name': filename, 'text': text})
                 else:
-                    print(f"Warning: Could not extract text from DOCX: {filename}")
+                    logger.warning(f"Could not extract text from DOCX: {filename}")
             elif filename.endswith(".txt"):
-                print(f"Loading TXT: {filename}")
+                logger.info(f"Loading TXT: {filename}")
                 with open(file_path, 'r', encoding='utf-8') as f:
                     text = f.read()
                 if text:
                     documents_text.append({'name': filename, 'text': text})
                 else:
-                    print(f"Warning: TXT file is empty: {filename}")
+                    logger.warning(f"TXT file is empty: {filename}")
             # else: # Optional: handle other file types or ignore
-            #     print(f"Skipping unsupported file type: {filename}")
+            #     logger.info(f"Skipping unsupported file type: {filename}")
         except Exception as e:
-            print(f"Error loading document {filename}: {e}")
+            logger.error(f"Error loading document {filename}: {e}", exc_info=True)
     
     if not documents_text:
-        print("No documents loaded. Please ensure your SOP documents are in the 'sops' directory and are in .txt, .pdf, or .docx format.")
+        logger.warning("No documents loaded. Please ensure your SOP documents are in the 'sops' directory and are in .txt, .pdf, or .docx format.")
     return documents_text
 
 def get_text_chunks(documents_data):
@@ -58,8 +61,8 @@ def get_text_chunks(documents_data):
         return []
     
     text_splitter = RecursiveCharacterTextSplitter(
-        chunk_size=1000, 
-        chunk_overlap=200,
+        chunk_size=config.TEXT_CHUNK_SIZE, 
+        chunk_overlap=config.TEXT_CHUNK_OVERLAP,
         length_function=len
     )
     
@@ -71,13 +74,16 @@ def get_text_chunks(documents_data):
             all_chunks.append({'source': doc_data['name'], 'content': chunk, 'chunk_id': f"{doc_data['name']}_chunk_{i}"})
     
     if not all_chunks:
-        print("No text chunks were created. Ensure documents have extractable text.")
+        logger.warning("No text chunks were created. Ensure documents have extractable text.")
     else:
-        print(f"Created {len(all_chunks)} text chunks.")
+        logger.info(f"Created {len(all_chunks)} text chunks.")
     return all_chunks
 
 # Example usage (for testing purposes, can be removed later)
 if __name__ == '__main__':
+    # Setup basic logging for the test
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(name)s - %(message)s')
+
     # To test, create a 'sops' directory in the same location as utils.py
     # and add some .txt, .pdf, or .docx files.
     
@@ -88,19 +94,19 @@ if __name__ == '__main__':
         with open(os.path.join(sops_test_dir, "sample.txt"), "w") as f:
             f.write("This is a sample text document for testing the SOP chatbot utility functions. It contains multiple sentences.")
         # You might need to manually add a sample.pdf and sample.docx for full testing
-        print(f"Created dummy '{sops_test_dir}' directory and 'sample.txt'. Add PDF/DOCX files for more tests.")
+        logger.info(f"Created dummy '{sops_test_dir}' directory and 'sample.txt'. Add PDF/DOCX files for more tests.")
 
     loaded_docs = load_documents_from_sops_dir()
     if loaded_docs:
-        print(f"\nSuccessfully loaded {len(loaded_docs)} documents:")
+        logger.info(f"\nSuccessfully loaded {len(loaded_docs)} documents:")
         for doc in loaded_docs:
-            print(f"- {doc['name']} (length: {len(doc['text'])})")
+            logger.info(f"- {doc['name']} (length: {len(doc['text'])})")
         
         chunks = get_text_chunks(loaded_docs)
         if chunks:
-            print(f"\nSuccessfully created {len(chunks)} chunks.")
-            # print("First few chunks:")
+            logger.info(f"\nSuccessfully created {len(chunks)} chunks.")
+            # logger.info("First few chunks:")
             # for i, chunk_data in enumerate(chunks[:2]):
-            #     print(f"  Chunk {i+1} (from {chunk_data['source']}):\n    {chunk_data['content'][:100]}...\n")
+            #     logger.info(f"  Chunk {i+1} (from {chunk_data['source']}):\n    {chunk_data['content'][:100]}...\n")
     else:
-        print("\nNo documents were loaded. Please check the 'sops' directory and file formats.")
+        logger.warning("\nNo documents were loaded. Please check the 'sops' directory and file formats.")
