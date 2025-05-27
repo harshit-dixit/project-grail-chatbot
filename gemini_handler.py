@@ -6,17 +6,20 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import RetrievalQA
 from langchain_core.documents import Document
 import config
+import logging
+
+logger = logging.getLogger(__name__)
 
 def load_api_key():
     """Loads the Google API key from .env file."""
     env_file_name = config.ENV_FILE_NAME
     dotenv_full_path = os.path.join(config.PROJECT_ROOT, env_file_name)
     if not load_dotenv(dotenv_path=dotenv_full_path):
-        print(f"Warning: Could not find or load '{dotenv_full_path}'. Ensure it exists.")
+        logger.warning(f"Could not find or load '{dotenv_full_path}'. Ensure it exists.")
 
-    api_key = os.getenv("GOOGLE_API_KEY")
+    api_key = os.getenv("GEMINI_API_KEY")
     if not api_key:
-        raise ValueError(f"GOOGLE_API_KEY not found. Please ensure it's set in '{dotenv_full_path}' with: GOOGLE_API_KEY='YOUR_KEY_HERE'")
+        raise ValueError(f"GEMINI_API_KEY not found. Please ensure it's set in '{dotenv_full_path}' with: GEMINI_API_KEY='YOUR_KEY_HERE'")
     genai.configure(api_key=api_key)
     return api_key
 
@@ -43,8 +46,8 @@ def get_conversational_chain(llm, retriever):
         return None
 
     prompt_template = """
-    You are an AI assistant. Answer the following question based *only* on the provided context.
-    Be direct and do not refer to the fact that you are answering based on the context.
+    You are an friendly AI assistant. Answer the following question based *only* on the provided context.
+    Be flexible and try to find relevant answer from documents and do not refer to the fact that you are answering based on the context.
     If the answer is not found in the context, say 'The answer is not available in the provided documents.'
     
     Context:\n{context}\n
@@ -68,13 +71,10 @@ def get_conversational_chain(llm, retriever):
 if __name__ == '__main__':
     try:
         print("Attempting to load API key and initialize LLM...")
-        # Ensure you have a .env file with GOOGLE_API_KEY in the same directory as this script (or project root)
-        # Example .env content:
-        # GOOGLE_API_KEY="YOUR_GEMINI_API_KEY_HERE"
-        
-        # For this test to run, create a gemini_api_key.env file in the C:\Users\seema\Desktop\AI\windsurf\chatbot directory
-        # with your actual Google API Key.
-        # Example: echo GOOGLE_API_KEY="your_key_here" > gemini_api_key.env
+        # Ensure you have your gemini_api_key.env file in the project root (C:\Users\seema\Desktop\AI\windsurf\chatbot)
+        # with your actual Gemini API Key.
+        # Example content for gemini_api_key.env:
+        # GEMINI_API_KEY="YOUR_GEMINI_API_KEY_HERE"
         
         llm = get_llm()
         if llm:
@@ -102,8 +102,8 @@ if __name__ == '__main__':
             else:
                 print("Failed to create conversational chain.")
         else:
-            print("Failed to initialize LLM. Please check your GOOGLE_API_KEY in the gemini_api_key.env file.")
-            print(f"Create a gemini_api_key.env file in the project root (C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot) with: GOOGLE_API_KEY='YOUR_KEY'")
+            print("Failed to initialize LLM. Please check your GEMINI_API_KEY in the gemini_api_key.env file.")
+            print(f"Ensure the gemini_api_key.env file in the project root (C:\\Users\\seema\\Desktop\\AI\\windsurf\\chatbot) contains: GEMINI_API_KEY='YOUR_KEY'")
 
     except ValueError as ve:
         print(f"Configuration Error: {ve}")

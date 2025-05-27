@@ -81,20 +81,6 @@ const mixins = {
     '@media (min-width:0px) and (orientation: landscape)': {
       minHeight: 48,
     },
-    MuiPaper: {
-      styleOverrides: {
-        root: {
-          borderRadius: 4,
-        },
-      },
-    },
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          borderRadius: 4,
-        },
-      },
-    },
   },
 };
 
@@ -106,7 +92,7 @@ const getDesignTokens = (mode) => ({
       black: '#000000',
       white: '#ffffff',
     },
-    grey: grey,
+    grey: grey, // Use the imported grey scale from @mui/material/colors
     // Provide a default contrast text function
     getContrastText: (background) => {
       // Simple contrast calculation - can be enhanced
@@ -122,25 +108,25 @@ const getDesignTokens = (mode) => ({
       : { main: '#64B5F6', contrastText: '#000000' },
     secondary: mode === 'light' 
       ? { main: '#FF7043', contrastText: '#FFFFFF' } 
-      : { main: '#FF8A65', contrastText: '#000000' },
+      : { main: '#FFAB91', contrastText: '#000000' }, 
     error: mode === 'light' 
       ? { main: '#D32F2F', contrastText: '#FFFFFF' } 
-      : { main: '#F44336', contrastText: '#000000' },
+      : { main: '#F44336', contrastText: '#FFFFFF' },
     warning: mode === 'light' 
-      ? { main: '#ED6C02', contrastText: '#000000' } 
-      : { main: '#FFA726', contrastText: '#000000' },
+      ? { main: '#FFA000', contrastText: 'rgba(0,0,0,0.87)' } 
+      : { main: '#FFC107', contrastText: 'rgba(0,0,0,0.87)' },
     info: mode === 'light' 
-      ? { main: '#0288D1', contrastText: '#FFFFFF' } 
-      : { main: '#29B6F6', contrastText: '#000000' },
+      ? { main: '#1976D2', contrastText: '#FFFFFF' } 
+      : { main: '#2196F3', contrastText: '#FFFFFF' },
     success: mode === 'light' 
-      ? { main: '#2E7D32', contrastText: '#FFFFFF' } 
-      : { main: '#66BB6A', contrastText: '#000000' },
+      ? { main: '#388E3C', contrastText: '#FFFFFF' } 
+      : { main: '#4CAF50', contrastText: '#FFFFFF' },
     background: mode === 'light' 
-      ? { default: grey[200], paper: grey[50] } 
-      : { default: '#121212', paper: '#1E1E1E' }, 
+      ? { default: '#F4F6F8', paper: '#FFFFFF' } 
+      : { default: '#121212', paper: '#1E1E1E' },
     text: mode === 'light' 
-      ? { primary: grey[900], secondary: grey[700], disabled: grey[500] }
-      : { primary: '#E0E0E0', secondary: '#BDBDBD', disabled: '#757575' },
+      ? { primary: 'rgba(0,0,0,0.87)', secondary: 'rgba(0,0,0,0.6)', disabled: 'rgba(0,0,0,0.38)' } 
+      : { primary: '#FFFFFF', secondary: 'rgba(255,255,255,0.7)', disabled: 'rgba(255,255,255,0.5)' },
     action: mode === 'light' 
       ? { 
           active: 'rgba(0, 0, 0, 0.54)',
@@ -169,7 +155,7 @@ const getDesignTokens = (mode) => ({
           activatedOpacity: 0.24,
         },
     divider: mode === 'light' ? 'rgba(0, 0, 0, 0.12)' : 'rgba(255, 255, 255, 0.12)',
-    // Removed the nested 'grey' objects from here as it's now top-level
+    // Removed the mode-specific 'grey' objects from here as it's now top-level and uses the imported 'grey'
   },
 });
 
@@ -204,12 +190,7 @@ const AppWithTheme = () => {
       transitions,
       mixins,
       // Apply design tokens
-      ...designTokens,
-      // Ensure mode is set in palette
-      palette: {
-        ...designTokens.palette,
-        mode,
-      },
+      ...designTokens, // This spreads the palette which includes the mode.
       // Component overrides
       components: {
         MuiCssBaseline: {

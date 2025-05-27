@@ -114,24 +114,12 @@ def process_sops():
             logger.warning(app_state["error_message"])
             return jsonify({"success": False, "message": app_state["error_message"], "docs_count": app_state["processed_docs_count"], "chunks_count": 0}), 200
 
-        # Extract 'content' for FAISS and keep 'metadata' for LangChain Document objects
-        # Assuming get_text_chunks returns a list of dicts like {'source': 'doc_name', 'content': 'chunk_text', 'chunk_id': 'some_id'}
-        # And vector_store_manager.create_vector_store expects a list of LangChain Document objects
-        langchain_documents = []
-        for chunk_data in text_chunks_with_source:
-            metadata = {"source": chunk_data.get('source', 'Unknown'), 
-                        "chunk_id": chunk_data.get('chunk_id', 'Unknown')}
-            # Add any other metadata parts you expect, e.g., page numbers if available
-            if 'file_name' in chunk_data.get('metadata', {}): # Compatibility with older structure from ask_question
-                metadata['file_name'] = chunk_data['metadata']['file_name']
-            if 'page' in chunk_data.get('metadata', {}):
-                metadata['page'] = chunk_data['metadata']['page']
-            langchain_documents.append(Document(page_content=chunk_data['content'], metadata=metadata))
-
-        app_state["processed_chunks_count"] = len(langchain_documents)
+        # text_chunks_with_source is already a list of Document objects, no need to convert
+        app_state["processed_chunks_count"] = len(text_chunks_with_source)
         logger.info(f"Successfully created {app_state['processed_chunks_count']} text chunks.")
 
-        vector_store_object, returned_chunks_data = create_vector_store(langchain_documents, force_recreate=True) 
+        # Pass the Document objects directly to create_vector_store
+        vector_store_object, returned_chunks_data = create_vector_store(text_chunks_with_source, force_recreate=True) 
         app_state["vector_store"] = vector_store_object
         
         if not app_state["vector_store"]:
@@ -220,24 +208,9 @@ def ask_question():
         return jsonify({"error": error_message}), 500
 
 if __name__ == '__main__':
-    # Ensure the API key is loaded at startup if it's not already handled by get_llm or similar.
-    # This might be redundant if get_llm() already calls load_api_key().
-    try:
-        load_api_key()
-        app_state["api_key_loaded"] = True
-        logger.info("Flask app starting: API key loaded.")
-    except ValueError as ve:
-        app_state["api_key_loaded"] = False
-        app_state["error_message"] = str(ve)
-        logger.error(f"Flask app startup error: {str(ve)}")
-    except Exception as ex:
-        app_state["api_key_loaded"] = False
-        app_state["error_message"] = f"An unexpected error occurred during API key loading at startup: {str(ex)}"
-        logger.critical(f"Flask app startup - unexpected error during API key loading: {ex}", exc_info=True)
-
-    # Call initialize_app to set up LLM etc. This was missing from direct __main__ execution path.
+    # initialize_app() handles API key loading and LLM setup.
     if not initialize_app():
-        logger.warning("Application initialization failed in __main__. Check logs for details. App will still run but may not be functional.")
+        logger.warning("Application initialization failed in __main__. Check logs for details. App will still run but may not be fully functional.")
 
     logger.info("Starting Flask app on host 0.0.0.0, port 5001")
     app.run(host='0.0.0.0', port=5001, debug=True)

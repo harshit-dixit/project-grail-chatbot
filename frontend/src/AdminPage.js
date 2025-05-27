@@ -31,18 +31,12 @@ const AdminPage = ({ showSnackbar, refreshMainAppStatus }) => {
   const [isLoadingAdminStatus, setIsLoadingAdminStatus] = useState(true);
   const [isProcessingAdminSops, setIsProcessingAdminSops] = useState(false);
 
-  // const getStatusChipColor = (status) => {
-  //   if (status.includes('Error') || status.includes('Failed') || status.includes('not loaded')) return 'error';
-  //   if (status.includes('connected')) return 'success';
-  //   return 'default';
-  // };
-
   const getBooleanChipColor = (value) => (value ? 'success' : 'error');
 
   const fetchAdminStatus = useCallback(async () => {
     setIsLoadingAdminStatus(true);
     try {
-      const response = await fetch('http://localhost:5001/api/status');
+      const response = await fetch('http://127.0.0.1:5001/api/status');
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
       setAdminApiKeyLoaded(data.api_key_loaded);
@@ -66,7 +60,7 @@ const AdminPage = ({ showSnackbar, refreshMainAppStatus }) => {
     setIsProcessingAdminSops(true);
     if (showSnackbar) showSnackbar('Processing SOP documents... This may take a moment.', 'info');
     try {
-      const response = await fetch('http://localhost:5001/api/process_sops', { method: 'POST' });
+      const response = await fetch('http://127.0.0.1:5001/api/process_sops', { method: 'POST' });
       const data = await response.json();
       if (!response.ok) throw new Error(data.error || `HTTP error! status: ${response.status}`);
       

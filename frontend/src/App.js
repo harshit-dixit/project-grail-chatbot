@@ -20,11 +20,6 @@ const initialMessages = [
 ];
 
 const AppHeader = ({ theme }) => {
-  if (typeof tataSteelBlueLogo === 'undefined') {
-    console.warn('tataSteelBlueLogo is undefined at AppHeader render time.');
-  } else {
-    console.log('tataSteelBlueLogo in AppHeader:', tataSteelBlueLogo);
-  }
 
   return (
     <AppBar position="static" sx={{ backgroundColor: theme.palette.background.paper, color: theme.palette.text.primary, boxShadow: theme.shadows[2] }}>
@@ -41,7 +36,7 @@ const AppHeader = ({ theme }) => {
                 src={tataSteelBlueLogo} 
                 alt="Tata Steel Blue Logo" 
                 style={{ 
-                  height: '24.5px', /* 70% of 35px */
+                  maxHeight: '35px', 
                   width: 'auto', 
                   display: 'block',
                   objectFit: 'contain',
@@ -274,7 +269,7 @@ function App() {
 
   const fetchAppStatus = useCallback(async () => {
     try {
-      const response = await fetch('http://localhost:5001/api/status');
+      const response = await fetch('http://127.0.0.1:5001/api/status');
       if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
       const data = await response.json();
       setApiKeyLoaded(data.api_key_loaded);
@@ -303,7 +298,7 @@ function App() {
     setIsAsking(true);
 
     try {
-      const response = await fetch('http://localhost:5001/api/ask', {
+      const response = await fetch('http://127.0.0.1:5001/api/ask', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ question: currentQuestion }),

@@ -2,6 +2,7 @@ import os
 from PyPDF2 import PdfReader
 import docx2txt
 from langchain.text_splitter import RecursiveCharacterTextSplitter
+from langchain_core.documents import Document
 import config
 import logging
 
@@ -66,34 +67,38 @@ def get_text_chunks(documents_data):
         length_function=len
     )
     
-    all_chunks = []
-    for doc_data in documents_data:
-        chunks = text_splitter.split_text(doc_data['text'])
-        # Storing source document name with each chunk for potential future reference
-        for i, chunk in enumerate(chunks):
-            all_chunks.append({'source': doc_data['name'], 'content': chunk, 'chunk_id': f"{doc_data['name']}_chunk_{i}"})
+    all_chunks = [] 
+    for doc_data in documents_data: 
+        doc_text = doc_data.get('text', '')
+        if not isinstance(doc_text, str) or not doc_text.strip(): 
+            logger.warning(f"Document '{doc_data.get('name', 'Unknown')}' has no valid text content or is empty. Skipping.")
+            continue
+
+        chunks_text_list = text_splitter.split_text(doc_text) 
+        
+        for i, chunk_content in enumerate(chunks_text_list):
+            metadata = {
+                'source': doc_data['name'], 
+                'chunk_id': f"{doc_data['name']}_chunk_{i}"
+            }
+            document = Document(page_content=chunk_content, metadata=metadata)
+            all_chunks.append(document)
     
     if not all_chunks:
         logger.warning("No text chunks were created. Ensure documents have extractable text.")
     else:
-        logger.info(f"Created {len(all_chunks)} text chunks.")
+        logger.info(f"Created {len(all_chunks)} Document objects as chunks.")
     return all_chunks
 
 # Example usage (for testing purposes, can be removed later)
 if __name__ == '__main__':
-    # Setup basic logging for the test
     logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(name)s - %(message)s')
 
-    # To test, create a 'sops' directory in the same location as utils.py
-    # and add some .txt, .pdf, or .docx files.
-    
-    # Create a dummy sops directory and files for testing if they don't exist
     sops_test_dir = config.SOP_DIR_PATH
     if not os.path.exists(sops_test_dir):
         os.makedirs(sops_test_dir)
         with open(os.path.join(sops_test_dir, "sample.txt"), "w") as f:
             f.write("This is a sample text document for testing the SOP chatbot utility functions. It contains multiple sentences.")
-        # You might need to manually add a sample.pdf and sample.docx for full testing
         logger.info(f"Created dummy '{sops_test_dir}' directory and 'sample.txt'. Add PDF/DOCX files for more tests.")
 
     loaded_docs = load_documents_from_sops_dir()
@@ -105,8 +110,5 @@ if __name__ == '__main__':
         chunks = get_text_chunks(loaded_docs)
         if chunks:
             logger.info(f"\nSuccessfully created {len(chunks)} chunks.")
-            # logger.info("First few chunks:")
-            # for i, chunk_data in enumerate(chunks[:2]):
-            #     logger.info(f"  Chunk {i+1} (from {chunk_data['source']}):\n    {chunk_data['content'][:100]}...\n")
-    else:
-        logger.warning("\nNo documents were loaded. Please check the 'sops' directory and file formats.")
+        else:
+            logger.warning("\nNo documents were loaded. Please check the 'sops' directory and file formats.")
