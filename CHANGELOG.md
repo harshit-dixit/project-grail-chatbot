@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [Unreleased] - 2025-06-03
+
+### Changed
+- **Migrated to GenAI API**: Switched from direct Google Generative AI SDK to the new GenAI API service.
+  - The application now uses the `gemini-2.0-flash` model via the GenAI API.
+  - Authentication is handled using a service account JSON file and ID tokens.
+  - `gemini_handler.py` was significantly refactored:
+    - Introduced `CustomGenAILLM`, a custom Langchain LLM class, to interface with the GenAI API.
+    - Updated configuration loading to use new environment variables for GenAI API key (`GenAI_API_KEY`), ADID (`MY_P_NO`), and service account file path (`SERVICE_ACCOUNT_FILE_PATH`).
+  - `config.py` was updated with new settings for the GenAI API (URL, deployment name, max tokens, and environment variable names).
+  - Added `google-auth` and `google-auth-oauthlib` to `requirements.txt` for the new authentication mechanism.
+
+---
+
 ## [Unreleased] - 2025-05-29
 
 ### Added

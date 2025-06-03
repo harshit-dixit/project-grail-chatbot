@@ -338,6 +338,7 @@ function App() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', backgroundColor: theme.palette.background.default }}>
+
       <AppHeader theme={theme} />
       <Routes>
         <Route 
@@ -364,6 +365,7 @@ function App() {
           {snackbarMessage}
         </Alert>
       </Snackbar>
+
     </Box>
   );
 }

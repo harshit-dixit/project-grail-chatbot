@@ -8,3 +8,5 @@ PyPDF2
 docx2txt
 Flask
 Flask-CORS
+google-auth
+google-auth-oauthlib

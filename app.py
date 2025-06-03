@@ -9,7 +9,7 @@ from langchain_core.documents import Document
 # Project-specific modules
 from utils import load_documents_from_sops_dir, get_text_chunks
 from vector_store_manager import create_vector_store, get_retriever
-from gemini_handler import get_llm, get_conversational_chain, load_api_key
+from gemini_handler import get_llm, get_conversational_chain
 
 app = Flask(__name__)
 CORS(app) # Enable CORS for all routes, allowing React frontend to call
@@ -40,21 +40,25 @@ app_state = {
 def initialize_app():
     """Initializes API key and basic configurations."""
     try:
-        load_api_key() # This will raise ValueError if key is not found/set
-        app_state["api_key_loaded"] = True
-        app_state["error_message"] = None
-        logger.info("Application initialized: API key loaded successfully.")
-        # Initialize LLM and QA chain components that don't depend on documents yet
+        # get_llm() will now handle necessary credential/config loading internally.
+        # We'll consider api_key_loaded to be true if get_llm() succeeds.
+        app_state["api_key_loaded"] = False # Assume not loaded until LLM is confirmed
         llm = get_llm()
         if llm:
+            app_state["api_key_loaded"] = True
+        app_state["error_message"] = None
+        # logger.info("Application initialized: API key loaded successfully.") # This is now part of LLM init
+        # LLM initialization is already attempted above to set api_key_loaded.
+        if app_state["api_key_loaded"]:
+            logger.info("LLM initialized successfully (implies API/config loaded).")
             # QA chain might be better initialized after vector store is ready
             # For now, let's assume it can be partially set up or fully after SOPs
             pass # app_state["qa_chain"] = get_conversational_chain(llm) if needed standalone
-            logger.info("LLM initialized successfully.")
         else:
-            app_state["error_message"] = "Failed to initialize LLM. Check API key and Gemini setup."
-            app_state["api_key_loaded"] = False # if LLM fails, likely key issue
-            logger.error(f"Failed to initialize LLM. API Key Loaded: {app_state['api_key_loaded']}. Error: {app_state['error_message']}")
+            # Error message would have been set by get_llm() or CustomGenAILLM if it failed
+            if not app_state["error_message"]:
+                 app_state["error_message"] = "Failed to initialize LLM. Check logs for details."
+            logger.error(f"LLM initialization failed. Error: {app_state['error_message']}")
             return False
         return True
     except ValueError as e:

@@ -5,7 +5,7 @@ from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_core.documents import Document
 
 from utils import get_text_chunks, load_documents_from_sops_dir 
-from gemini_handler import load_api_key 
+from gemini_handler import get_gemini_api_key_for_embeddings 
 import traceback
 import logging 
 import config 
@@ -18,8 +18,7 @@ TEXT_CHUNKS_PATH = os.path.join(VECTOR_STORE_DIR, "text_chunks.pkl")
 
 def get_embeddings_model():
     try:
-        load_api_key() 
-        api_key = os.getenv("GEMINI_API_KEY")
+        api_key = get_gemini_api_key_for_embeddings()
         if not api_key:
             # This should ideally be caught by load_api_key() in gemini_handler.py,
             # but as an additional safeguard here.
