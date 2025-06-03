@@ -28,16 +28,6 @@ def load_env_vars():
 
 load_env_vars() # Load environment variables when the module is imported
 
-# --- Function to get original Gemini API Key (for Embeddings) --- 
-def get_gemini_api_key_for_embeddings():
-    """Loads and returns the original GEMINI_API_KEY from the .env file for embeddings."""
-    api_key = os.getenv("GEMINI_API_KEY") # Assumes load_env_vars() has been called
-    if not api_key:
-        # This error indicates that GEMINI_API_KEY is missing, which is specifically needed for embeddings.
-        logger.error(f"GEMINI_API_KEY not found in environment. This key is required for GoogleGenerativeAIEmbeddings.")
-        raise ValueError(f"GEMINI_API_KEY not found. Please ensure it's set in '{config.ENV_FILE_NAME}' for embeddings.")
-    logger.info("Successfully retrieved GEMINI_API_KEY for embeddings.")
-    return api_key
 
 # --- GenAI API Client --- 
 class CustomGenAILLM(LLM):
@@ -111,8 +101,8 @@ class CustomGenAILLM(LLM):
         # We'll take the whole prompt as the user content for simplicity here.
         # A more robust solution might parse out system/user roles if needed.
         messages = [
-            {"role": "system", "content": "You are an AI assistant that helps people find information."}, # Generic system prompt
-            {"role": "user", "content": prompt} # The combined prompt from RetrievalQA
+            {"role": "system", "content": "You are a humble AI assistant that helps people find information. Please format your responses using Markdown. For example, use bullet points for lists (e.g., * item), and use asterisks or underscores for bold (e.g., **bold text**) or italic text (e.g., *italic text*). If you need to present tabular data, use Markdown table syntax."},
+            {"role": "user", "content": prompt}
         ]
 
         payload = {
@@ -179,14 +169,12 @@ def get_llm(model_name=None, temperature=None):
         return llm
     except Exception as e:
         logger.error(f"Error initializing CustomGenAILLM: {e}")
-        # print(f"Error initializing LLM: {e}") # Keep print for direct script runs
         raise RuntimeError(f"Failed to initialize LLM: {e}")
 
 def get_conversational_chain(llm, retriever):
     """Creates and returns a conversational QA chain using the provided LLM and retriever."""
     if not llm or not retriever:
         logger.error("LLM or retriever not provided to get_conversational_chain.")
-        # print("Error: LLM or retriever not provided to get_conversational_chain.")
         return None
 
     # The prompt template here defines the structure that will be passed to CustomGenAILLM._call

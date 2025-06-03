@@ -47,13 +47,11 @@ def initialize_app():
         if llm:
             app_state["api_key_loaded"] = True
         app_state["error_message"] = None
-        # logger.info("Application initialized: API key loaded successfully.") # This is now part of LLM init
         # LLM initialization is already attempted above to set api_key_loaded.
         if app_state["api_key_loaded"]:
             logger.info("LLM initialized successfully (implies API/config loaded).")
             # QA chain might be better initialized after vector store is ready
             # For now, let's assume it can be partially set up or fully after SOPs
-            pass # app_state["qa_chain"] = get_conversational_chain(llm) if needed standalone
         else:
             # Error message would have been set by get_llm() or CustomGenAILLM if it failed
             if not app_state["error_message"]:

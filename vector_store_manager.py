@@ -1,11 +1,11 @@
 import os
 import pickle 
 from langchain_community.vectorstores import FAISS
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_core.documents import Document
 
 from utils import get_text_chunks, load_documents_from_sops_dir 
-from gemini_handler import get_gemini_api_key_for_embeddings 
+
 import traceback
 import logging 
 import config 
@@ -18,24 +18,15 @@ TEXT_CHUNKS_PATH = os.path.join(VECTOR_STORE_DIR, "text_chunks.pkl")
 
 def get_embeddings_model():
     try:
-        api_key = get_gemini_api_key_for_embeddings()
-        if not api_key:
-            # This should ideally be caught by load_api_key() in gemini_handler.py,
-            # but as an additional safeguard here.
-            raise ValueError("GEMINI_API_KEY not found in environment variables after attempting to load it.")
-        
-        embeddings = GoogleGenerativeAIEmbeddings(
-            model=config.EMBEDDING_MODEL_NAME, 
-            google_api_key=api_key  # Explicitly pass the API key
+        embeddings = HuggingFaceEmbeddings(
+            model_name="all-MiniLM-L6-v2",
+            model_kwargs={'device': 'cpu'}
         )
+        logger.info("Successfully initialized HuggingFaceEmbeddings model: all-MiniLM-L6-v2")
         return embeddings
     except Exception as e:
-        logger.error(f"Error initializing embeddings model: {e}", exc_info=True) 
-        # If the exception is already a ValueError or RuntimeError, re-raise it directly
-        # to preserve its specific type, otherwise wrap it in a generic RuntimeError.
-        if isinstance(e, (ValueError, RuntimeError)):
-            raise
-        raise RuntimeError(f"Could not initialize embeddings model: {e}. Check API key and model name.")
+        logger.error(f"Error initializing HuggingFace embeddings model: {e}", exc_info=True)
+        raise RuntimeError(f"Could not initialize HuggingFace embeddings model: {e}")
 
 def create_vector_store(text_chunks_data, force_recreate=False):
     if not text_chunks_data:
@@ -182,6 +173,5 @@ if __name__ == '__main__':
 
     except RuntimeError as re:
         logger.error(f"Runtime Error: {re}", exc_info=True)
-        logger.error("Please ensure your GEMINI_API_KEY is correctly set in the .env file in the project root.") 
     except Exception as e:
         logger.error(f"An unexpected error occurred during testing: {e}", exc_info=True)

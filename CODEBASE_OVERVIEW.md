@@ -50,8 +50,7 @@ User (Frontend) → Flask API (app.py)
 2. **Processing SOPs:**
     - Loads all documents from `sops/` (PDF, DOCX, TXT) using `utils.py`.
     - Splits each document into manageable text chunks with metadata.
-    - Embeds chunks using Google’s embedding model (legacy Gemini API key).
-    - Stores embeddings in a FAISS vector store for fast retrieval.
+    - Embeds text chunks using the `all-MiniLM-L6-v2` model from the `sentence-transformers` library. This is accessed via the `HuggingFaceEmbeddings` wrapper from `langchain-community`, and removes the previous dependency on Google's online embedding services and associated API keys for this part of the process. The embeddings are stored in a FAISS vector store for fast retrieval.
 3. **Answering Questions:**
     - User sends a question to the Flask API (usually via a frontend).
     - The backend retrieves the most relevant document chunks using vector search.

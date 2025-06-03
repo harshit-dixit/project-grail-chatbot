@@ -15,10 +15,10 @@ TEXT_CHUNK_OVERLAP = 200
 LLM_MODEL_NAME = "gemini-1.5-flash-latest"
 # Temperature for the LLM (0.0 to 1.0). Lower values are more deterministic.
 LLM_TEMPERATURE = 0.7 
-EMBEDDING_MODEL_NAME = "models/embedding-001"
+# EMBEDDING_MODEL_NAME = "models/embedding-001"  # (deprecated, now using all-MiniLM-L6-v2 via HuggingFaceEmbeddings)
 
 # --- API Key Configuration ---
-# Name of the .env file containing the GOOGLE_API_KEY
+# Name of the .env file containing API keys and service account path.
 ENV_FILE_NAME = "gemini_api_key.env"
 
 # --- GenAI API Configuration ---
