@@ -1,17 +1,27 @@
 # Project GRAIL Chatbot
 
-A chatbot that answers questions based on Standard Operating Procedures (SOPs) using Retrieval Augmented Generation (RAG) and the Google Gemini API.
+A modern, production-grade chatbot that answers questions based on Standard Operating Procedures (SOPs) using Retrieval Augmented Generation (RAG) and the GenAI API (Gemini 2.0 Flash model). Built for Tata Steel, it features a robust Python backend and a user-friendly React frontend.
 
 ---
 
 ## Features
 
-- Load SOP documents (`.txt`, `.pdf`, `.docx`)
-- Chunk documents for efficient retrieval
-- Generate embeddings and store them in a FAISS vector database
-- Retrieve relevant document chunks based on user queries
-- Use Google Gemini API for context-aware answers
-- Modern React frontend and Flask backend
+- **Document Ingestion**: Supports `.txt`, `.pdf`, `.docx` SOPs
+- **Smart Chunking**: Efficiently splits documents for retrieval
+- **Semantic Search**: Uses FAISS and HuggingFace embeddings for fast, accurate retrieval
+- **GenAI Integration**: Answers are generated using the Gemini 2.0 Flash model via a secure API
+- **Modern Frontend**: Responsive React app with Tata branding and Material UI
+- **Admin Panel**: Manage SOP processing and system status
+- **Secure Auth**: Service account and API key based authentication
+
+---
+
+## Architecture Overview
+
+- **Backend**: Python (Flask), LangChain, FAISS, HuggingFace, Google Auth
+- **Frontend**: React (MUI), communicates with Flask backend
+- **AI Model**: GenAI API (Gemini 2.0 Flash) via custom LangChain LLM
+- **Document Store**: FAISS index with chunked SOPs (vector_store_manager.py)
 
 ---
 
@@ -19,15 +29,23 @@ A chatbot that answers questions based on Standard Operating Procedures (SOPs) u
 
 ```
 chatbot/
-├── sops/                  # SOP documents directory
-├── app.py                 # Flask backend
-├── frontend/              # React frontend
-├── utils.py               # Document loading and processing
-├── vector_store_manager.py # Vector store management
-├── gemini_handler.py      # Gemini API integration
-├── requirements.txt       # Python dependencies
-├── .env                   # API keys (not committed)
-└── README.md              # This file
+├── app.py                  # Flask REST API backend
+├── config.py               # All backend configuration
+├── utils.py                # SOP loading & chunking
+├── vector_store_manager.py # FAISS index management
+├── gemini_handler.py       # GenAI API integration (LangChain LLM)
+├── requirements.txt        # Python dependencies
+├── gemini_api_key.env      # API/service account secrets (not committed)
+├── sops/                   # Place your SOP documents here
+├── faiss_index/            # Vector DB and chunk cache
+├── frontend/
+│   ├── src/
+│   │   ├── App.js          # Main React app
+│   │   ├── AdminPage.js    # Admin interface
+│   │   ├── logo/           # Tata Steel logos
+│   │   └── ...
+│   └── ...
+└── README.md
 ```
 
 ---
@@ -44,11 +62,101 @@ cd chatbot
 ### 2. Backend Setup (Python/Flask)
 
 **a. Create and activate a virtual environment:**
+
 ```bash
 python -m venv venv
 venv\Scripts\activate  # On Windows
 # source venv/bin/activate  # On macOS/Linux
 ```
+
+**b. Install Python dependencies:**
+
+```bash
+pip install -r requirements.txt
+```
+
+**c. Configure API Keys and Service Account:**
+
+- Copy your Google Cloud service account JSON to the project root.
+- Create `gemini_api_key.env` in the root with:
+
+```
+SERVICE_ACCOUNT_FILE_PATH=svc-genai-api-dev-oneit.json
+GenAI_API_KEY=your_genai_api_key
+MY_P_NO=your_adid
+```
+
+- Edit `config.py` if you need to change API URLs, model, or SOP directory.
+
+**d. Add SOP documents:**
+
+- Place your `.pdf`, `.docx`, or `.txt` files in the `sops/` directory.
+
+**e. Run the backend:**
+
+```bash
+python app.py
+```
+
+The backend will be available at `http://127.0.0.1:5001/`
+
+### 3. Frontend Setup (React)
+
+```bash
+cd frontend
+npm install
+npm start
+```
+
+The frontend will run on `http://localhost:3000/` and proxy API calls to the Flask backend.
+
+---
+
+## Usage
+
+1. **Open the frontend** at [http://localhost:3000/](http://localhost:3000/)
+2. **Admin Panel**: Click the settings icon to access the Admin page. Here you can process SOPs and check backend/API status.
+3. **Chat**: Ask questions. The chatbot will retrieve relevant SOP chunks and generate answers using the Gemini model.
+4. **Clear Chat**: Use the clear icon to reset the conversation.
+
+---
+
+## Environment Variables
+
+- `SERVICE_ACCOUNT_FILE_PATH`: Path to your Google Cloud service account JSON
+- `GenAI_API_KEY`: API key for GenAI API
+- `MY_P_NO`: Your ADID (for authentication)
+
+---
+
+## Tech Stack
+
+- **Backend**: Python, Flask, LangChain, FAISS, HuggingFace, Google Auth
+- **Frontend**: React, Material UI
+- **AI**: GenAI API (Gemini 2.0 Flash)
+
+---
+
+## Customization & Advanced
+
+- **SOP Chunking**: Tune `TEXT_CHUNK_SIZE` and `TEXT_CHUNK_OVERLAP` in `config.py`
+- **Model/Deployment**: Change `GENAI_DEPLOYMENT_NAME` or API URL in `config.py`
+- **UI**: Update logos in `frontend/src/logo/` and tweak theme in `frontend/src/index.js`
+
+---
+
+## Troubleshooting
+
+- **API Key/Service Account errors**: Check `gemini_api_key.env` and logs in `app.log`
+- **No answers**: Ensure SOPs are processed (see Admin Panel)
+- **Vector store issues**: Delete `faiss_index/` to force a rebuild
+
+---
+
+## License
+
+Proprietary. For Tata Steel internal use only.
+
 
 **b. Install dependencies:**
 ```bash
