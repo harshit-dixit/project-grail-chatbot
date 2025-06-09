@@ -5,6 +5,7 @@ import traceback
 import logging
 import config
 from langchain_core.documents import Document
+from werkzeug.utils import secure_filename
 
 # Project-specific modules
 from utils import load_documents_from_sops_dir, get_text_chunks
@@ -182,7 +183,7 @@ def ask_question():
         # The get_conversational_chain now directly uses the retriever passed to it.
         # The chain itself handles the document retrieval and response generation.
         # RetrievalQA chain expects the user's question under the 'query' key.
-        result = app_state["qa_chain"]({"query": question, "chat_history": []}) # Corrected key to 'query'
+        result = app_state["qa_chain"].invoke({"query": question, "chat_history": []}) # Use invoke for newer Langchain
         answer = result.get("result", "No answer found.") # RetrievalQA returns the answer in 'result'
         
         # Optional: include source documents if available and desired
@@ -209,10 +210,64 @@ def ask_question():
         logger.error(f"Error in /api/ask: {e}", exc_info=True)
         return jsonify({"error": error_message}), 500
 
+@app.route('/api/list_sops', methods=['GET'])
+def list_sops():
+    """Lists SOP files currently in the SOPs directory."""
+    sops_dir = config.SOP_DIR_PATH
+    if not os.path.exists(sops_dir) or not os.path.isdir(sops_dir):
+        logger.warning(f"SOPs directory '{sops_dir}' not found.")
+        return jsonify({"sops": [], "message": "SOPs directory not found."}), 404
+    try:
+        sop_files = [f for f in os.listdir(sops_dir) if os.path.isfile(os.path.join(sops_dir, f))]
+        logger.info(f"Found {len(sop_files)} SOP files in '{sops_dir}'.")
+        return jsonify({"sops": sop_files, "count": len(sop_files)}), 200
+    except Exception as e:
+        logger.error(f"Error listing SOP files: {e}", exc_info=True)
+        return jsonify({"sops": [], "message": f"Error listing SOP files: {str(e)}"}), 500
+
+@app.route('/api/upload_sop', methods=['POST'])
+def upload_sop():
+    """Handles SOP file uploads."""
+    sops_dir = config.SOP_DIR_PATH
+    if not os.path.exists(sops_dir):
+        try:
+            os.makedirs(sops_dir)
+            logger.info(f"SOPs directory '{sops_dir}' created.")
+        except Exception as e:
+            logger.error(f"Could not create SOPs directory '{sops_dir}': {e}", exc_info=True)
+            return jsonify({"success": False, "message": f"Could not create SOPs directory: {str(e)}"}), 500
+
+    if 'file' not in request.files:
+        logger.warning("No file part in upload_sop request.")
+        return jsonify({"success": False, "message": "No file part in the request."}), 400
+    
+    file = request.files['file']
+    if file.filename == '':
+        logger.warning("No file selected for upload_sop request.")
+        return jsonify({"success": False, "message": "No file selected."}), 400
+
+    if file:
+        try:
+            filename = secure_filename(file.filename)
+            file_path = os.path.join(sops_dir, filename)
+            file.save(file_path)
+            logger.info(f"File '{filename}' uploaded successfully to '{sops_dir}'.")
+            # After uploading, it's a good idea to mark SOPs as not processed
+            # so the user is prompted to re-process them.
+            app_state["sops_processed"] = False
+            app_state["qa_chain"] = None # Clear the chain as well
+            logger.info("Marked SOPs as not processed and cleared QA chain due to new file upload.")
+            return jsonify({"success": True, "message": f"File '{filename}' uploaded successfully. Please re-process SOPs."}), 200
+        except Exception as e:
+            logger.error(f"Error saving uploaded file '{file.filename}': {e}", exc_info=True)
+            return jsonify({"success": False, "message": f"Error saving file: {str(e)}"}), 500
+    
+    return jsonify({"success": False, "message": "File upload failed for an unknown reason."}), 500
+
 if __name__ == '__main__':
     # initialize_app() handles API key loading and LLM setup.
     if not initialize_app():
         logger.warning("Application initialization failed in __main__. Check logs for details. App will still run but may not be fully functional.")
 
     logger.info("Starting Flask app on host 0.0.0.0, port 5001")
-    app.run(host='0.0.0.0', port=5001, debug=True)
+    app.run(host='0.0.0.0', port=5001, debug=True, reloader_type="stat")

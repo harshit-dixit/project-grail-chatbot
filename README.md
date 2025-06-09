@@ -6,24 +6,172 @@ A modern, production-grade chatbot that answers questions based on Standard Oper
 
 ## Features
 
-- **Document Ingestion**: Supports `.txt`, `.pdf`, `.docx` SOPs
+- **Document Ingestion**: Upload and process `.txt`, `.pdf`, `.docx` SOPs
 - **Smart Chunking**: Efficiently splits documents for retrieval
 - **Semantic Search**: Uses FAISS and HuggingFace embeddings for fast, accurate retrieval
 - **GenAI Integration**: Answers are generated using the Gemini 2.0 Flash model via a secure API
 - **Modern Frontend**: Responsive React app with Tata branding and Material UI
-- **Admin Panel**: Manage SOP processing and system status
+- **Admin Panel**: Manage SOP processing, upload/view SOP files, and check system status
 - **Secure Auth**: Service account and API key based authentication
 
 ---
 
-## Architecture Overview
+## CODEBASE_OVERVIEW
 
-- **Backend**: Python (Flask), LangChain, FAISS, HuggingFace, Google Auth
-- **Frontend**: React (MUI), communicates with Flask backend
-- **AI Model**: GenAI API (Gemini 2.0 Flash) via custom LangChain LLM
-- **Document Store**: FAISS index with chunked SOPs (vector_store_manager.py)
+### Purpose
+This codebase implements a RAG-based chatbot for Tata Steel, answering questions from SOP documents using a combination of semantic retrieval (FAISS, HuggingFace) and the Gemini 2.0 Flash LLM via a secure GenAI API.
+
+### Main Components & File Interconnections
+
+#### Backend (Python)
+- **app.py**: Main Flask app. Orchestrates API endpoints (`/api/status`, `/api/process_sops`, `/api/ask`, `/api/list_sops`, `/api/upload_sop`), loads config, manages app state, and delegates to utility modules.
+- **config.py**: Centralizes all configuration (paths, model names, API URLs, env vars, chunk sizes).
+- **utils.py**: Loads and chunks SOPs (PDF, TXT, DOCX), returns LangChain Document objects. Uses `PyMuPDF` for PDF, `python-docx` for DOCX.
+- **vector_store_manager.py**: Builds FAISS index from documents, manages retriever creation and persistence. Uses `HuggingFaceEmbeddings` for local, free embeddings.
+- **gemini_handler.py**: Wraps GenAI API as a custom LangChain LLM, handles authentication (`google-auth`, `google-auth-oauthlib`) and prompt formatting.
+- **faiss_index/**: Stores FAISS index and chunk cache (pickled with Python's `pickle`).
+- **sops/**: Directory for user-uploaded SOPs (managed via admin UI and backend endpoints).
+- **requirements.txt**: Python dependencies (see below for library rationale).
+
+#### Frontend (React)
+- **frontend/src/App.js**: Main chat interface. Handles user input, displays chat, and communicates with Flask backend.
+- **frontend/src/AdminPage.js**: Admin UI for status, SOP processing, file upload, and file list. Uses Material UI and custom icons.
+- **frontend/src/logo/**: Tata Steel and Tata branding assets.
+- **frontend/src/index.js**: Entry point, theme, and global styles.
+
+#### File & Module Connections
+- Frontend calls Flask API endpoints for:
+  - `/api/status`: System health
+  - `/api/process_sops`: Triggers SOP loading, chunking, and vector store creation
+  - `/api/ask`: Chatbot Q&A
+  - `/api/list_sops`: Lists SOP files in backend
+  - `/api/upload_sop`: Uploads new SOP files
+- Backend processes requests, manages vector store, and invokes GenAI API for answers.
+- All configuration is managed in `config.py` and `.env` files.
+
+### Key Python Libraries & Why Used
+- **Flask**: REST API backend, easy integration with React frontend.
+- **LangChain**: Standardizes LLM and retrieval pipeline, custom LLM for GenAI API.
+- **FAISS**: Fast, scalable vector search for document retrieval.
+- **HuggingFace Transformers**: Local, free document embeddings (no API cost).
+- **PyMuPDF (fitz)**: Robust PDF parsing.
+- **python-docx**: DOCX file parsing.
+- **google-auth, google-auth-oauthlib**: Secure service account authentication for GenAI API.
+- **pickle**: Efficient serialization of vector stores and document chunks.
+- **sentence-transformers**: Used for HuggingFace embedding models.
 
 ---
+
+## Setup Instructions
+
+### 1. Clone the Repository
+```bash
+git clone <your-repo-url>
+cd chatbot
+```
+
+### 2. Backend Setup (Python/Flask)
+
+**a. Create and activate a virtual environment:**
+```bash
+python -m venv venv
+venv\Scripts\activate  # On Windows
+# source venv/bin/activate  # On macOS/Linux
+```
+
+**b. Install Python dependencies:**
+```bash
+pip install -r requirements.txt
+```
+
+**c. Configure API Keys and Service Account:**
+- Copy your Google Cloud service account JSON to the project root.
+- Create `gemini_api_key.env` in the root with:
+  ```
+  SERVICE_ACCOUNT_FILE_PATH=svc-genai-api-dev-oneit.json
+  GenAI_API_KEY=your_genai_api_key
+  MY_P_NO=your_adid
+  ```
+- Edit `config.py` if you need to change API URLs, model, or SOP directory.
+
+**d. Add SOP documents:**
+- Place your `.pdf`, `.docx`, or `.txt` files in the `sops/` directory (or upload via the admin UI).
+
+**e. Run the backend:**
+```bash
+python app.py
+```
+The backend will be available at `http://127.0.0.1:5001/`
+
+### 3. Frontend Setup (React)
+```bash
+cd frontend
+npm install
+npm start
+```
+The frontend will run on `http://localhost:3000/` and proxy API calls to the Flask backend.
+
+---
+
+## Usage
+
+1. **Open the frontend** at [http://localhost:3000/](http://localhost:3000/)
+2. **Admin Panel**: Click the settings icon to access the Admin page. Here you can process SOPs, upload/view files, and check backend/API status.
+3. **Chat**: Ask questions. The chatbot will retrieve relevant SOP chunks and generate answers using the Gemini model.
+4. **Clear Chat**: Use the clear icon to reset the conversation.
+
+---
+
+## Environment Variables
+- `SERVICE_ACCOUNT_FILE_PATH`: Path to your Google Cloud service account JSON
+- `GenAI_API_KEY`: API key for GenAI API
+- `MY_P_NO`: Your ADID (for authentication)
+
+---
+
+## Customization & Advanced
+- **SOP Chunking**: Tune `TEXT_CHUNK_SIZE` and `TEXT_CHUNK_OVERLAP` in `config.py`
+- **Model/Deployment**: Change `GENAI_DEPLOYMENT_NAME` or API URL in `config.py`
+- **UI**: Update logos in `frontend/src/logo/` and tweak theme in `frontend/src/index.js`
+
+---
+
+## Troubleshooting
+- **API Key/Service Account errors**: Check `gemini_api_key.env` and logs in `app.log`
+- **No answers**: Ensure SOPs are processed (see Admin Panel)
+- **Vector store issues**: Delete `faiss_index/` to force a rebuild
+
+---
+
+## Deployment Guide & Precautions
+
+### Steps
+1. **Backend:**
+   - Set up a Python virtual environment.
+   - Install dependencies with `pip install -r requirements.txt`.
+   - Place your service account JSON and API key in `gemini_api_key.env`.
+   - Ensure `config.py` paths (especially `SOP_DIR_PATH`) are correct for the deployment environment.
+   - Place SOP files in the `sops/` directory (or upload via admin UI).
+   - Run `python app.py` (for production, use Gunicorn or another WSGI server).
+2. **Frontend:**
+   - In `frontend/`, run `npm install`.
+   - Build the frontend with `npm run build` for production.
+   - Serve static files with a production server (e.g., Nginx, serve, or Flask static route).
+
+### Precautions
+- **Security:** Never commit `gemini_api_key.env` or service account files to version control.
+- **CORS:** For production, restrict CORS in `app.py` to only allow your frontend domain.
+- **API Keys:** Always use environment variables or secure vaults for keys in production.
+- **Static Files:** Ensure the frontend build is served from a secure, fast static server.
+- **Logging:** Monitor and rotate logs (`app.log`) to avoid disk bloat.
+- **Dependencies:** Pin dependency versions for reproducibility.
+- **Scaling:** For high load, use a production WSGI server (e.g., Gunicorn) and a reverse proxy (e.g., Nginx).
+
+---
+
+## License
+
+Proprietary. For Tata Steel internal use only.
 
 ## Project Structure
 
@@ -290,99 +438,3 @@ chatbot/
 5.  **Add SOP Documents:**
     *   Place your SOP documents (e.g., `.txt`, `.pdf`, `.docx` files) into the `sops/` directory.
 
-## Usage
-
-3. Set up the Backend (Python/Flask):
-
-Open a terminal or command prompt on your work laptop.
-Navigate into the cloned project directory (e.g., cd path/to/project-grail-chatbot).
-
-Create and activate a Python virtual environment (highly recommended):
-python -m venv venv (This creates a venv folder)
-On Windows: venv\Scripts\activate
-On macOS/Linux: source venv/bin/activate
-
-Install Python dependencies:
-With your virtual environment active, run: pip install -r requirements.txt
-Create the API Key File:
-In the project's root directory on your work laptop, manually create the gemini_api_key.env file (this file was ignored by Git and thus not cloned).
-Add your Google API key to it:
-CopyInsert
-GOOGLE_API_KEY='YOUR_ACTUAL_GOOGLE_API_KEY'
-SOPs/Data Directory:
-Your config.py specifies SOP_DIR_NAME = "sops". Create this sops directory in the project root on your work laptop if it doesn't exist.
-Copy your SOP documents (PDFs, DOCX, TXT files) into this sops directory. (These were likely not uploaded to GitHub if they are large or numerous).
-4. Set up the Frontend (React):
-
-In your terminal, navigate to the frontend directory within your project: cd frontend
-Install Node.js dependencies:
-Run: ```bash npm install ```
-5. Run the Application:
-
-You'll need two terminals open.
-Terminal 1: Start the Backend (Flask):
-Make sure you are in the project's root directory (path/to/project-grail-chatbot).
-Ensure your Python virtual environment (venv) is activated.
-Run: ```bash python app.py ```
-You should see output indicating the Flask server is running (usually on http://127.0.0.1:5000/).
-Terminal 2: Start the Frontend (React):
-Navigate to the frontend directory (path/to/project-grail-chatbot/frontend).
-Run: ```bash npm start ```
-This will usually open the application automatically in your web browser at http://localhost:3000. If not, open it manually.
-
-
-
-
-Method 2: Manual Copy (If not using Git or no remote repository)
-
-On your current laptop:
-Locate your main project directory: C:\Users\seema\Desktop\AI\windsurf\chatbot
-Copy this entire chatbot folder to a USB drive, network share, or use a cloud storage service (like OneDrive, Google Drive, Dropbox) to transfer it.
-Important: When copying, you can usually exclude the frontend/node_modules folder and the Python virtual environment folder (e.g., venv, .venv) if you have one in the backend. These can be very large and are easily recreated.
-On your work laptop:
-Copy the chatbot folder from your transfer medium to your desired location.
-Regardless of the transfer method, you'll need to set up the environment on your work laptop:
-
-Install Prerequisites:
-Python: Ensure Python is installed (preferably the same version you used, or a compatible one).
-Node.js and npm: Ensure Node.js (which includes npm) is installed for the frontend.
-Set up Backend (Python):
-Navigate to your backend directory (e.g., C:\path\to\chatbot\).
-It's highly recommended to use a virtual environment:
-bash
-CopyInsert
-```bash python -m venv venv ```
-.\venv\Scripts\activate  # On Windows
-# source venv/bin/activate # On macOS/Linux
-
-Install Python dependencies:
-bash
-CopyInsert in Terminal
-pip install -r requirements.txt
-Set up Frontend (React):
-Navigate to your frontend directory (e.g., C:\path\to\chatbot\frontend\).
-Install Node.js dependencies:
-bash
-CopyInsert in Terminal
-npm install
-
-API Key:
-Crucially, you will need to recreate your gemini_api_key.env file in the root of the chatbot directory on your work laptop. Add your GOOGLE_API_KEY=YOUR_ACTUAL_KEY to this file. Do not commit this file to public Git repositories. If you are using Git, ensure .env or *.env is listed in your .gitignore file.
-
-Verify Logo Paths (if manual copy):
-If you manually copied and had any issues with logo paths recently, just double-check they are correct relative to App.js (frontend/src/logo/ was the last setup).
-Running the Application on your Work Laptop:
-
-Once everything is set up:
-
-Start the Backend (Flask):
-Open a terminal in the chatbot directory (with your Python virtual environment activated).
-Run: python app.py
-Start the Frontend (React Dev Server):
-Open another terminal in the chatbot/frontend directory.
-Run: npm start
-This should get Project GRAIL up and running on your work machine. The key is to replicate the file structure and reinstall all dependencies.
-
-
-
-This will open the chatbot interface in your web browser.

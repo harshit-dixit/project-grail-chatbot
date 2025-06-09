@@ -4,6 +4,30 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [Unreleased] - 2025-06-09
+
+### Added
+- **Admin Page File Management:**
+  - New "Manage SOP Files" panel in the admin page to upload new SOP documents (`.pdf`, `.txt`, `.docx`) directly from the UI and view a live list of loaded SOP files.
+  - Upload and list features are in a separate panel below the system status/process box.
+- **Backend API Endpoints:**
+  - `/api/list_sops` endpoint: Lists all SOP files in the `sops/` directory.
+  - `/api/upload_sop` endpoint: Accepts file uploads to the `sops/` directory, marks SOPs as not processed, and clears the QA chain.
+- **Frontend Enhancements:**
+  - `AdminPage.js`: File upload and SOP list panels, with loading and error handling, using Material UI and new icons.
+  - UI state and logic for file selection, upload, and refresh.
+
+### Changed
+- Refactored function order in `AdminPage.js` to resolve initialization errors and ESLint warnings.
+- Improved error handling and feedback for admin file management actions.
+- Replaced `PyPDF2` with `PyMuPDF` (fitz) for PDF document processing in `utils.py` to improve PDF handling capabilities and performance.
+- Updated `requirements.txt` to reflect the change from `PyPDF2` to `PyMuPDF`.
+
+### Fixed
+- Bug where `config.SOPS_DIR_PATH` was incorrectly referenced (should be `config.SOP_DIR_PATH`).
+- React ESLint warnings and runtime errors regarding hook dependencies and use-before-define in `AdminPage.js`.
+- Corrected an issue in `app.py` where the Flask development server would unexpectedly reload when processing SOPs. Changed `app.run()` to use `reloader_type="stat"`.
+
 ## [Unreleased] - 2025-06-03
 
 ### Changed

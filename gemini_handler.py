@@ -34,7 +34,7 @@ class CustomGenAILLM(LLM):
     """Custom Langchain LLM to interact with the GenAI API."""
     api_url: str = config.GENAI_API_URL
     deployment_name: str = config.GENAI_DEPLOYMENT_NAME
-    temperature: float = config.LLM_TEMPERATURE # Retain original temperature setting
+    temperature: float = 0.7  # Default temperature as a class attribute
     max_tokens: str = config.GENAI_MAX_TOKENS
     
     # Credentials from environment
@@ -43,8 +43,9 @@ class CustomGenAILLM(LLM):
     adid: Optional[str] = None
     authed_session: Optional[AuthorizedSession] = None
 
-    def __init__(self, **kwargs: Any):
+    def __init__(self, **kwargs: Any): # temperature will be handled by Pydantic via class attribute or kwargs
         super().__init__(**kwargs)
+        # self.temperature is now set by Pydantic from class default or kwargs
         self._load_credentials()
         self._initialize_session()
 
@@ -158,13 +159,14 @@ class CustomGenAILLM(LLM):
             "max_tokens": self.max_tokens
         }
 
-def get_llm(model_name=None, temperature=None):
+def get_llm(): # Removed model_name and temperature parameters
     """Initializes and returns the Custom GenAI LLM."""
-    # model_name and temperature from args are now for potential overrides if needed,
-    # but CustomGenAILLM primarily uses config values.
-    # For simplicity, we'll ignore them here and let CustomGenAILLM use its defaults from config.
+    logger.info(f"Initializing LLM via CustomGenAILLM.")
+    # CustomGenAILLM now uses its own default temperature or one passed to its constructor if needed.
+    # It reads deployment_name directly from config.
     try:
-        llm = CustomGenAILLM()
+        # Pass the default temperature or allow it to be configured if necessary
+        llm = CustomGenAILLM() # Uses default temperature 0.7
         logger.info("CustomGenAILLM initialized successfully.")
         return llm
     except Exception as e:
@@ -199,53 +201,3 @@ def get_conversational_chain(llm, retriever):
     )
     logger.info("Conversational QA chain created successfully.")
     return chain
-
-# Example usage (for testing purposes, can be removed or commented out later)
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(name)s - %(message)s')
-    logger.info("Starting gemini_handler.py example usage...")
-    try:
-        logger.info("Attempting to initialize LLM...")
-        # Ensure your gemini_api_key.env file in the project root is configured with:
-        # SERVICE_ACCOUNT_FILE_PATH='C:\path\to\your\svc-account.json'
-        # GenAI_API_KEY='YOUR_GenAI_API_KEY'
-        # MY_P_NO='YOUR_P_NO'
-        
-        llm = get_llm()
-        if llm:
-            logger.info("LLM Initialized successfully.")
-            
-            class DummyRetriever:
-                def get_relevant_documents(self, query: str) -> List[Document]:
-                    logger.debug(f"DummyRetriever: getting relevant documents for query: {query}")
-                    return [Document(page_content="This is a dummy SOP about safety procedures.")]
-                def invoke(self, query: str) -> List[Document]: # For Langchain 0.1.x compatibility if needed
-                    logger.debug(f"DummyRetriever: invoking for query: {query}")
-                    return self.get_relevant_documents(query)
-
-            dummy_retriever = DummyRetriever()
-            chain = get_conversational_chain(llm, dummy_retriever)
-            
-            if chain:
-                logger.info("Conversational chain created successfully.")
-                test_question = "What are the safety procedures?"
-                logger.info(f"Sending test question to chain: {test_question}")
-                response = chain.invoke({"query": test_question}) # Use invoke for newer Langchain
-                logger.info(f"\nTest Question: {test_question}")
-                logger.info(f"Test Answer: {response.get('result')}")
-                logger.info(f"Source Documents: {response.get('source_documents')}")
-            else:
-                logger.error("Failed to create conversational chain.")
-        else:
-            logger.error("Failed to initialize LLM. Please check your environment variables and service account file.")
-
-    except ValueError as ve:
-        logger.error(f"Configuration Error: {ve}")
-    except FileNotFoundError as fnfe:
-        logger.error(f"File Not Found Error: {fnfe}")
-    except ConnectionError as ce:
-        logger.error(f"Connection Error: {ce}")
-    except RuntimeError as rte:
-        logger.error(f"Runtime Error: {rte}")
-    except Exception as e:
-        logger.error(f"An unexpected error occurred: {e}", exc_info=True)

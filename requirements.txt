@@ -5,7 +5,7 @@ langchain-google-genai
 langchain-community
 sentence-transformers
 faiss-cpu
-PyPDF2
+PyMuPDF
 docx2txt
 Flask
 Flask-CORS
