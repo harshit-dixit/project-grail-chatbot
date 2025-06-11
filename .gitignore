@@ -15,6 +15,7 @@ sops/
 gemini_api_key.env
 app.log
 Gen AI API Usage Manual.pdf
+svc-genai-api-dev-oneit.json
 
 
 # misc

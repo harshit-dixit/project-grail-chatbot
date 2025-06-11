@@ -1,5 +1,5 @@
 import os
-from PyPDF2 import PdfReader
+import fitz  # PyMuPDF
 import docx2txt
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
@@ -21,24 +21,31 @@ def load_documents_from_sops_dir():
         file_path = os.path.join(sops_directory, filename)
         try:
             if filename.endswith(".pdf"):
-                logger.info(f"Loading PDF: {filename}")
-                reader = PdfReader(file_path)
+                logger.info(f"Loading PDF: {filename} using PyMuPDF")
                 text = ""
-                for page in reader.pages:
-                    page_text = page.extract_text()
-                    if page_text:
-                        text += page_text
+                try:
+                    doc = fitz.open(file_path)
+                    for page_num in range(len(doc)):
+                        page = doc.load_page(page_num)
+                        page_text = page.get_text("text") # "text" for plain text extraction
+                        if page_text:
+                            text += page_text
+                    doc.close() # Important: close the document
+                except Exception as e:
+                    logger.error(f"Error processing PDF {filename} with PyMuPDF: {e}")
+                    # Optionally, you might want to skip this file or handle the error differently
+                
                 if text:
                     documents_text.append({'name': filename, 'text': text})
                 else:
-                    logger.warning(f"Could not extract text from PDF: {filename}")
+                    logger.warning(f"Could not extract text from PDF: {filename} using PyMuPDF, or PDF was empty.")
             elif filename.endswith(".docx"):
                 logger.info(f"Loading DOCX: {filename}")
                 text = docx2txt.process(file_path)
                 if text:
                     documents_text.append({'name': filename, 'text': text})
                 else:
-                    logger.warning(f"Could not extract text from DOCX: {filename}")
+                    logger.warning(f"Could not extract text from DOCX: {filename} or DOCX was empty.")
             elif filename.endswith(".txt"):
                 logger.info(f"Loading TXT: {filename}")
                 with open(file_path, 'r', encoding='utf-8') as f:
@@ -89,26 +96,3 @@ def get_text_chunks(documents_data):
     else:
         logger.info(f"Created {len(all_chunks)} Document objects as chunks.")
     return all_chunks
-
-# Example usage (for testing purposes, can be removed later)
-if __name__ == '__main__':
-    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(name)s - %(message)s')
-
-    sops_test_dir = config.SOP_DIR_PATH
-    if not os.path.exists(sops_test_dir):
-        os.makedirs(sops_test_dir)
-        with open(os.path.join(sops_test_dir, "sample.txt"), "w") as f:
-            f.write("This is a sample text document for testing the SOP chatbot utility functions. It contains multiple sentences.")
-        logger.info(f"Created dummy '{sops_test_dir}' directory and 'sample.txt'. Add PDF/DOCX files for more tests.")
-
-    loaded_docs = load_documents_from_sops_dir()
-    if loaded_docs:
-        logger.info(f"\nSuccessfully loaded {len(loaded_docs)} documents:")
-        for doc in loaded_docs:
-            logger.info(f"- {doc['name']} (length: {len(doc['text'])})")
-        
-        chunks = get_text_chunks(loaded_docs)
-        if chunks:
-            logger.info(f"\nSuccessfully created {len(chunks)} chunks.")
-        else:
-            logger.warning("\nNo documents were loaded. Please check the 'sops' directory and file formats.")

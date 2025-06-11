@@ -4,6 +4,55 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [Unreleased] - 2025-06-09
+
+### Added
+- **Admin Page File Management:**
+  - New "Manage SOP Files" panel in the admin page to upload new SOP documents (`.pdf`, `.txt`, `.docx`) directly from the UI and view a live list of loaded SOP files.
+  - Upload and list features are in a separate panel below the system status/process box.
+- **Backend API Endpoints:**
+  - `/api/list_sops` endpoint: Lists all SOP files in the `sops/` directory.
+  - `/api/upload_sop` endpoint: Accepts file uploads to the `sops/` directory, marks SOPs as not processed, and clears the QA chain.
+- **Frontend Enhancements:**
+  - `AdminPage.js`: File upload and SOP list panels, with loading and error handling, using Material UI and new icons.
+  - UI state and logic for file selection, upload, and refresh.
+
+### Changed
+- Refactored function order in `AdminPage.js` to resolve initialization errors and ESLint warnings.
+- Improved error handling and feedback for admin file management actions.
+- Replaced `PyPDF2` with `PyMuPDF` (fitz) for PDF document processing in `utils.py` to improve PDF handling capabilities and performance.
+- Updated `requirements.txt` to reflect the change from `PyPDF2` to `PyMuPDF`.
+
+### Fixed
+- Bug where `config.SOPS_DIR_PATH` was incorrectly referenced (should be `config.SOP_DIR_PATH`).
+- React ESLint warnings and runtime errors regarding hook dependencies and use-before-define in `AdminPage.js`.
+- Corrected an issue in `app.py` where the Flask development server would unexpectedly reload when processing SOPs. Changed `app.run()` to use `reloader_type="stat"`.
+
+## [Unreleased] - 2025-06-03
+
+### Changed
+- **Migrated to GenAI API**: Switched from direct Google Generative AI SDK to the new GenAI API service.
+  - The application now uses the `gemini-2.0-flash` model via the GenAI API.
+  - Authentication is handled using a service account JSON file and ID tokens.
+  - `gemini_handler.py` was significantly refactored:
+    - Introduced `CustomGenAILLM`, a custom Langchain LLM class, to interface with the GenAI API.
+    - Updated configuration loading to use new environment variables for GenAI API key (`GenAI_API_KEY`), ADID (`MY_P_NO`), and service account file path (`SERVICE_ACCOUNT_FILE_PATH`).
+  - `config.py` was updated with new settings for the GenAI API (URL, deployment name, max tokens, and environment variable names).
+  - Added `google-auth` and `google-auth-oauthlib` to `requirements.txt` for the new authentication mechanism.
+- **Switched to Local Embeddings**: Replaced `GoogleGenerativeAIEmbeddings` with `HuggingFaceEmbeddings` (using the `all-MiniLM-L6-v2` model) for document embeddings. This removes the dependency on the Google API key for the embedding generation process and allows for offline/free embedding capabilities.
+  - Modified `vector_store_manager.py` to initialize and use `HuggingFaceEmbeddings`.
+  - Removed the `get_gemini_api_key_for_embeddings` function from `gemini_handler.py` as it is no longer required.
+  - Added `sentence-transformers` to `requirements.txt` as a new dependency.
+  - Commented out the `EMBEDDING_MODEL_NAME` configuration in `config.py` as the model name is now hardcoded in `vector_store_manager.py`.
+
+### Added
+- **Markdown Rendering for Chat Responses**: Enhanced the chatbot to support Markdown formatting in its responses.
+  - Updated the system prompt in `gemini_handler.py` to instruct the LLM to generate Markdown-formatted answers.
+  - Added `react-markdown` to the frontend dependencies.
+  - Modified `frontend/src/App.js` to use `ReactMarkdown` for rendering bot messages, allowing for lists, bold/italic text, and other Markdown features to be displayed correctly.
+
+---
+
 ## [Unreleased] - 2025-05-29
 
 ### Added

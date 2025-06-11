@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   Container, Paper, TextField, Button, Typography, Box, AppBar, Toolbar, IconButton, 
-  Grow, Avatar, useTheme, Snackbar, Alert as MuiAlert, Tooltip, CircularProgress
+  Grow, useTheme, Snackbar, Alert as MuiAlert, Tooltip, CircularProgress
 } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
 import SendIcon from '@mui/icons-material/Send';
 import SettingsIcon from '@mui/icons-material/Settings';
 import DeleteSweepIcon from '@mui/icons-material/DeleteSweep';
@@ -162,7 +163,10 @@ const ChatInterface = ({
                     wordWrap: 'break-word',
                   }}
                 >
-                  <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>{msg.text}</Typography>
+                  {msg.sender === 'bot' ? 
+                    <ReactMarkdown>{msg.text}</ReactMarkdown> : 
+                    <Typography variant="body1" sx={{ whiteSpace: 'pre-wrap' }}>{msg.text}</Typography>
+                  }
                 </Paper>
               </Box>
             </Grow>
@@ -338,6 +342,7 @@ function App() {
 
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh', backgroundColor: theme.palette.background.default }}>
+
       <AppHeader theme={theme} />
       <Routes>
         <Route 
@@ -364,6 +369,7 @@ function App() {
           {snackbarMessage}
         </Alert>
       </Snackbar>
+
     </Box>
   );
 }
