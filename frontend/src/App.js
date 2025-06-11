@@ -61,7 +61,7 @@ const AppHeader = ({ theme }) => {
               color: theme.palette.text.primary,
               whiteSpace: 'nowrap'
             }}>
-              Project GRAIL Chatbot
+              Group Reporting AI Library - GRAIL
             </Typography>
           </Box>
           <Box sx={{ 
